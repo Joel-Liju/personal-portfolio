@@ -13,7 +13,7 @@ const allWork = (await getCollection('work', ({ data }) => !data.draft)).sort(
   title="Work"
   description="Selected projects in product design and frontend engineering."
 >
-  <section class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
     <SectionHeading eyebrow="All work" count={allWork.length} />
     <div>
       {allWork.map((entry) => <WorkRow entry={entry} />)}

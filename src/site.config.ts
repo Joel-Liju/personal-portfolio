@@ -1,22 +1,22 @@
 // Edit this file to re-label the entire site. Header, Footer, the homepage
 // and SEO defaults all read from here instead of hardcoding copy.
 export const SITE = {
-  name: 'John Doe',
-  role: 'Product design & frontend engineering',
-  email: 'johndoe@example.com',
-  tagline: 'I design and build interfaces that hold up under real use.',
+  name: 'Joel Jacob',
+  role: 'Software engineer and solution architect',
+  email: 'joelliju10@gmail.com',
   description:
-    'Portfolio of John Doe — product design and frontend engineering, with an emphasis on speed, clarity, and the details most people skip.',
-  status: 'Currently building at Studio Co · open to new work, Q3 2026',
+    'Portfolio of Joel Jacob — product design and frontend engineering, with an emphasis on speed, clarity, and the details most people skip.',
+  status: 'Currently seeking new opportunities — open to full-time, contract, and freelance work.',
   social: [
-    { label: 'GitHub', href: 'https://github.com/your-username' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/your-username' },
-    { label: 'X', href: 'https://x.com/your-username' },
+    { label: 'GitHub', href: 'https://github.com/joel-liju' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joel-liju-jacob/' }
   ],
   locale: 'en',
 } as const;
 
 export const NAV_LINKS = [
   { label: 'Work', href: '/work' },
+  { label: 'Hobbies', href: '/hobbies' },
   { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ] as const;

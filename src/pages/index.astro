@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
 import WorkRow from '@/components/WorkRow.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
+import StatusPill from '../components/StatusPill.astro';
 import { SITE } from '@/site.config';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
@@ -14,18 +15,17 @@ const selected = [...featured, ...rest].slice(0, 5);
 ---
 
 <BaseLayout title={SITE.name}>
-  <section class="mx-auto max-w-3xl px-6 pt-16 pb-20 sm:pt-24">
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-20 sm:pt-18">
     <p class="text-ink-soft mb-6 inline-flex items-center gap-2 font-mono text-xs">
-      <span class="bg-signal h-1.5 w-1.5 rounded-full" aria-hidden="true"></span>
-      {SITE.status}
+      <StatusPill />
     </p>
 
-    <h1 class="font-display text-ink max-w-2xl text-4xl leading-[1.1] font-medium sm:text-5xl">
-      {SITE.tagline}
+    <h1 class="font-display text-ink max-w-4xl text-6xl leading-none font-medium sm:text-8xl">
+      A <span class="tagline-wavy inline-block transition-transform duration-300 ease-out hover:-translate-y-1 hover:decoration-signal/80 underline decoration-signal decoration-wavy decoration-2 underline-offset-4 cursor-pointer"><a href="/work">problem-solver</a></span> and <span class="tagline-dotted inline-block transition-all duration-300 ease-out hover:decoration-ink hover:tracking-wide underline decoration-ink/40 decoration-dotted decoration-2 underline-offset-4 cursor-pointer"><a href="/about">cooker</a></span> of food.
     </h1>
 
     <p class="text-ink-soft mt-6 max-w-md">
-      {SITE.role} — based on the work below, not a list of buzzwords.
+      {SITE.role} 
     </p>
 
     <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -34,7 +34,7 @@ const selected = [...featured, ...rest].slice(0, 5);
     </div>
   </section>
 
-  <section id="work" class="mx-auto max-w-3xl px-6 pb-20">
+  <section id="work" class="mx-auto max-w-5xl px-6 pb-20">
     <SectionHeading eyebrow="Selected work" count={allWork.length} />
     <div>
       {selected.map((entry) => <WorkRow entry={entry} />)}
@@ -53,7 +53,7 @@ const selected = [...featured, ...rest].slice(0, 5);
     }
   </section>
 
-  <section id="about" class="mx-auto max-w-3xl px-6 pb-20">
+  <section id="about" class="mx-auto max-w-5xl px-6 pb-20">
     <SectionHeading eyebrow="About" />
     <p class="text-ink-soft max-w-xl">
       {SITE.description}
@@ -63,7 +63,7 @@ const selected = [...featured, ...rest].slice(0, 5);
     </a>
   </section>
 
-  <section id="contact" class="mx-auto max-w-3xl px-6 pb-24">
+  <section id="contact" class="mx-auto max-w-5xl px-6 pb-24">
     <SectionHeading eyebrow="Let's talk" />
     <p class="font-display text-ink max-w-lg text-2xl sm:text-3xl">
       Have something worth building?
@@ -76,3 +76,41 @@ const selected = [...featured, ...rest].slice(0, 5);
     </a>
   </section>
 </BaseLayout>
+
+<style>
+  /* Entrance fade-in animation for initial page load */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+  }
+
+  /* Wavy underline sliding effect on hover */
+  @keyframes waveMove {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 20px;
+    }
+  }
+
+  .animated-wavy {
+    /* Page load entry */
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animated-wavy:hover {
+    /* Subtle background shimmer movement along the wavy line */
+    animation: waveMove 1s linear infinite;
+  }
+</style>

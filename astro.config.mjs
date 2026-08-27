@@ -26,7 +26,7 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Fraunces',
+      name: 'Space Grotesk',
       cssVariable: '--ff-display',
       weights: ['400', '500', '600'],
       styles: ['normal', 'italic'],
@@ -34,14 +34,14 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
-      name: 'Inter',
+      name: 'Lato',
       cssVariable: '--ff-body',
       weights: ['400', '500', '600'],
       subsets: ['latin'],
     },
     {
       provider: fontProviders.google(),
-      name: 'Space Mono',
+      name: 'JetBrains Mono',
       cssVariable: '--ff-mono',
       weights: ['400', '700'],
       subsets: ['latin'],

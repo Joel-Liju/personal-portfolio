@@ -13,23 +13,23 @@
 :root {
   color-scheme: light;
 
-  --paper: #f7f6f3; /* page background */
-  --ink: #15161b; /* primary text */
-  --ink-soft: #5b5d66; /* secondary text */
-  --signal: #3d3dff; /* the one accent color */
-  --line: #e4e2dc; /* borders, rules */
-  --surface: #efeeea; /* cards, raised panels */
+  --paper: #eef9fc; /* page background */
+  --ink: #161925; /* primary text */
+  --ink-soft: #23395b; /* secondary text */
+  --signal: #3685b5; /* the one accent color */
+  --line: #89aae6; /* borders, rules */
+  --surface: #ffffff; /* cards, raised panels */
 }
 
 .dark {
   color-scheme: dark;
 
-  --paper: #101114;
-  --ink: #f2f1ed;
-  --ink-soft: #9a9ca6;
-  --signal: #7b7bff;
-  --line: #26272c;
-  --surface: #1a1b20;
+  --paper: #161925;
+  --ink: #eef9fc;
+  --ink-soft: #89aae6;
+  --signal: #3685b5;
+  --line: #23395b;
+  --surface: #23395b;
 }
 
 /* `inline` keeps these resolving against the live --paper/--ink/etc custom

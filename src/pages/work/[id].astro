@@ -24,7 +24,7 @@ const formattedDate = formatDate(date);
 ---
 
 <BaseLayout title={title} description={summary}>
-  <article class="mx-auto max-w-3xl px-6 pt-16 pb-24 sm:pt-24">
+  <article class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
     <a href="/work" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
       ← All work
     </a>
@@ -36,8 +36,8 @@ const formattedDate = formatDate(date);
     <dl
       class="border-line text-ink-soft mt-6 flex flex-wrap gap-x-8 gap-y-2 border-y py-4 font-mono text-xs"
     >
-      <div><dt class="inline">Role —</dt><dd class="inline">{role}</dd></div>
-      <div><dt class="inline">Date —</dt><dd class="inline">{formattedDate}</dd></div>
+      <div><dt class="inline">Role — </dt><dd class="inline">{role}</dd></div>
+      <div><dt class="inline">Date — </dt><dd class="inline">{formattedDate}</dd></div>
       {
         tags.length > 0 && (
           <div>
