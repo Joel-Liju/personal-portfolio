@@ -22,4 +22,23 @@ const work = defineCollection({
     }),
 });
 
-export const collections = { work };
+const recipes = defineCollection({
+  loader: glob({ base: './src/content/recipe', pattern: '**/*.md' }),
+  schema: ({ image }) => z.object({
+      title: z.string(),
+      summary: z.string().max(160),
+      date: z.coerce.date(),
+      tags: z.array(z.string()).default([]),
+      cover: image().optional(),
+      url: z.url().optional(),
+      repo: z.url().optional(),
+      prepTime: z.string(),
+      servings: z.int(),
+      cookTime: z.string(),
+      Description: z.array(z.string()).default([]),
+      featured: z.boolean().default(false),
+      draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { work, recipes };
