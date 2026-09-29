@@ -5,7 +5,7 @@ export const SITE = {
   role: 'Software engineer and solution architect',
   email: 'joelliju10@gmail.com',
   description:
-    'Portfolio of Joel Jacob — product design and frontend engineering, with an emphasis on speed, clarity, and the details most people skip.',
+    'Portfolio of Joel Jacob — backend and full-stack software engineering, with an emphasis on reliability, clarity, and the details most people skip.',
   status: 'Currently seeking new opportunities — open to full-time, contract, and freelance work.',
   social: [
     { label: 'GitHub', href: 'https://github.com/joel-liju' },
