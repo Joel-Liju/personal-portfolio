@@ -4,45 +4,62 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { formatDate } from '@/utils/formatDate';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('recipes', ({ data }) => !data.draft);
-  return entries.map((entry) => ({
+  const wines = await getCollection('wines', ({ data }) => !data.draft);
+  return wines.map((entry) => ({
     params: { id: entry.id },
     props: { entry },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<'recipes'>;
+  entry: CollectionEntry<'wines'>;
 }
 
 const { entry } = Astro.props;
-const { title, summary, date, tags, prepTime, cookTime, servings, url } = entry.data;
+const { title, summary, date, producer, varietal, region, vintage, rating, tags, url } = entry.data;
 const { Content } = await render(entry);
-const formattedDate = formatDate(date);
 ---
 
 <BaseLayout title={title} description={summary}>
   <article class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
     <a
-      href="/hobbies/food"
+      href="/hobbies/wine"
       class="text-ink-soft hover:text-signal font-mono text-xs transition-colors"
     >
-      ← All recipes
+      ← All wine notes
     </a>
 
-    <p class="text-ink-soft mt-8 font-mono text-xs tracking-[0.2em] uppercase">Recipe</p>
-    <h1 class="font-display text-ink mt-3 max-w-2xl text-4xl font-medium sm:text-5xl">
-      {title}
-    </h1>
+    <p class="text-ink-soft mt-8 font-mono text-xs tracking-[0.2em] uppercase">Wine note</p>
+    <h1 class="font-display text-ink mt-3 max-w-2xl text-4xl font-medium sm:text-5xl">{title}</h1>
     <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">{summary}</p>
 
     <dl
       class="border-line text-ink-soft mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y py-4 font-mono text-xs"
     >
-      <div><dt class="inline">Added — </dt><dd class="inline">{formattedDate}</dd></div>
-      <div><dt class="inline">Prep — </dt><dd class="inline">{prepTime}</dd></div>
-      <div><dt class="inline">Cook — </dt><dd class="inline">{cookTime}</dd></div>
-      <div><dt class="inline">Serves — </dt><dd class="inline">{servings}</dd></div>
+      <div><dt class="inline">Producer — </dt><dd class="inline">{producer}</dd></div>
+      <div><dt class="inline">Varietal — </dt><dd class="inline">{varietal}</dd></div>
+      <div><dt class="inline">Region — </dt><dd class="inline">{region}</dd></div>
+      {
+        vintage && (
+          <div>
+            <>
+              <dt class="inline">Vintage — </dt>
+              <dd class="inline">{vintage}</dd>
+            </>
+          </div>
+        )
+      }
+      {
+        typeof rating === 'number' && (
+          <div>
+            <>
+              <dt class="inline">Rating — </dt>
+              <dd class="inline">{rating}/5</dd>
+            </>
+          </div>
+        )
+      }
+      <div><dt class="inline">Tasted — </dt><dd class="inline">{formatDate(date)}</dd></div>
       {
         tags.length > 0 && (
           <div>
@@ -65,7 +82,7 @@ const formattedDate = formatDate(date);
           rel="noreferrer"
           class="text-signal mt-10 inline-flex font-mono text-xs hover:underline"
         >
-          View original recipe in a new tab →
+          More about this wine →
         </a>
       )
     }

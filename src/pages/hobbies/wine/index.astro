@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { formatDate } from '@/utils/formatDate';
+
+const wines = (await getCollection('wines', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Wine" description="Bottles worth remembering, tasting notes, and pairings.">
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
+    <a href="/hobbies" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
+      ← All hobbies
+    </a>
+
+    <h1 class="font-display text-ink mt-6 text-4xl font-medium sm:text-5xl">Wine notes</h1>
+    <p class="text-ink-soft mt-4 max-w-xl leading-relaxed">
+      Bottles worth remembering, tasting notes, and pairings to revisit.
+    </p>
+
+    <div class="mt-12">
+      <SectionHeading eyebrow="Tasting notes" count={wines.length} />
+      {
+        wines.length > 0 ? (
+          <div>
+            {wines.map((wine) => (
+              <a
+                href={`/hobbies/wine/${wine.id}`}
+                class="group border-line hover:border-signal grid grid-cols-[1fr_auto] items-center gap-4 border-b py-5 transition-colors sm:gap-6"
+              >
+                <span class="min-w-0">
+                  <span class="font-display text-ink group-hover:text-signal block text-lg transition-colors">
+                    {wine.data.title}
+                  </span>
+                  <span class="text-ink-soft mt-1 block text-sm">{wine.data.summary}</span>
+                </span>
+                <span class="flex items-center gap-4">
+                  <span class="text-ink-soft hidden font-mono text-[11px] sm:block">
+                    {wine.data.region} · {formatDate(wine.data.date, 'compact')}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="text-ink-soft group-hover:text-signal transition-all group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="text-ink-soft py-6 leading-relaxed">
+            No tasting notes yet. Start a collection with the
+            <a href="/templates/wine.md" download class="text-signal hover:underline">
+              wine starter template
+            </a>
+            .
+          </p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

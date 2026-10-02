@@ -1,22 +1,55 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import WorkRow from '@/components/WorkRow.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
+import { formatDate } from '@/utils/formatDate';
 
 const allRecipes = (await getCollection('recipes', ({ data }) => !data.draft)).sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
 
-<BaseLayout
-  title="Recipes"
-  description="A collection of my favorite recipes."
->
+<BaseLayout title="Recipes" description="A collection of recipes I enjoy making.">
   <section class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
-    <SectionHeading eyebrow="All recipes" count={allRecipes.length} />
-    <div>
-      {allRecipes.map((entry) => <WorkRow entry={entry} />)}
+    <a href="/hobbies" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
+      ← All hobbies
+    </a>
+
+    <h1 class="font-display text-ink mt-6 text-4xl font-medium sm:text-5xl">Recipes</h1>
+    <p class="text-ink-soft mt-4 max-w-xl leading-relaxed">
+      A collection of recipes I enjoy making, with notes to make them easier to revisit.
+    </p>
+
+    <div class="mt-12">
+      <SectionHeading eyebrow="All recipes" count={allRecipes.length} />
+      <div>
+        {
+          allRecipes.map((entry) => (
+            <a
+              href={`/hobbies/food/${entry.id}`}
+              class="group border-line hover:border-signal grid grid-cols-[1fr_auto] items-center gap-4 border-b py-5 transition-colors sm:gap-6"
+            >
+              <span class="min-w-0">
+                <span class="font-display text-ink group-hover:text-signal block text-lg transition-colors">
+                  {entry.data.title}
+                </span>
+                <span class="text-ink-soft mt-1 block text-sm">{entry.data.summary}</span>
+              </span>
+              <span class="flex items-center gap-4">
+                <span class="text-ink-soft hidden font-mono text-[11px] sm:block">
+                  {formatDate(entry.data.date, 'compact')}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="text-ink-soft group-hover:text-signal transition-all group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>

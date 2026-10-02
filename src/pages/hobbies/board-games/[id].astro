@@ -4,45 +4,46 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { formatDate } from '@/utils/formatDate';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('recipes', ({ data }) => !data.draft);
-  return entries.map((entry) => ({
+  const games = await getCollection('boardGames', ({ data }) => !data.draft);
+  return games.map((entry) => ({
     params: { id: entry.id },
     props: { entry },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<'recipes'>;
+  entry: CollectionEntry<'boardGames'>;
 }
 
 const { entry } = Astro.props;
-const { title, summary, date, tags, prepTime, cookTime, servings, url } = entry.data;
+const { title, summary, date, minPlayers, maxPlayers, playTime, complexity, tags, url } =
+  entry.data;
 const { Content } = await render(entry);
-const formattedDate = formatDate(date);
 ---
 
 <BaseLayout title={title} description={summary}>
   <article class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
     <a
-      href="/hobbies/food"
+      href="/hobbies/board-games"
       class="text-ink-soft hover:text-signal font-mono text-xs transition-colors"
     >
-      ← All recipes
+      ← All board games
     </a>
 
-    <p class="text-ink-soft mt-8 font-mono text-xs tracking-[0.2em] uppercase">Recipe</p>
-    <h1 class="font-display text-ink mt-3 max-w-2xl text-4xl font-medium sm:text-5xl">
-      {title}
-    </h1>
+    <p class="text-ink-soft mt-8 font-mono text-xs tracking-[0.2em] uppercase">Board game</p>
+    <h1 class="font-display text-ink mt-3 max-w-2xl text-4xl font-medium sm:text-5xl">{title}</h1>
     <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">{summary}</p>
 
     <dl
       class="border-line text-ink-soft mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y py-4 font-mono text-xs"
     >
-      <div><dt class="inline">Added — </dt><dd class="inline">{formattedDate}</dd></div>
-      <div><dt class="inline">Prep — </dt><dd class="inline">{prepTime}</dd></div>
-      <div><dt class="inline">Cook — </dt><dd class="inline">{cookTime}</dd></div>
-      <div><dt class="inline">Serves — </dt><dd class="inline">{servings}</dd></div>
+      <div>
+        <dt class="inline">Players — </dt>
+        <dd class="inline">{minPlayers}–{maxPlayers}</dd>
+      </div>
+      <div><dt class="inline">Play time — </dt><dd class="inline">{playTime}</dd></div>
+      <div><dt class="inline">Complexity — </dt><dd class="inline">{complexity}</dd></div>
+      <div><dt class="inline">Added — </dt><dd class="inline">{formatDate(date)}</dd></div>
       {
         tags.length > 0 && (
           <div>
@@ -65,7 +66,7 @@ const formattedDate = formatDate(date);
           rel="noreferrer"
           class="text-signal mt-10 inline-flex font-mono text-xs hover:underline"
         >
-          View original recipe in a new tab →
+          More about this game →
         </a>
       )
     }

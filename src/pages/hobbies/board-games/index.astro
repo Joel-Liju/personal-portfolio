@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const games = (await getCollection('boardGames', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Board games"
+  description="Board games I enjoy, with player counts, play times, and notes."
+>
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
+    <a href="/hobbies" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
+      ← All hobbies
+    </a>
+
+    <h1 class="font-display text-ink mt-6 text-4xl font-medium sm:text-5xl">Board games</h1>
+    <p class="text-ink-soft mt-4 max-w-xl leading-relaxed">
+      Games that make it back to the table, from quick rounds to longer sessions.
+    </p>
+
+    <div class="mt-12">
+      <SectionHeading eyebrow="Game shelf" count={games.length} />
+      {
+        games.length > 0 ? (
+          <div>
+            {games.map((game) => (
+              <a
+                href={`/hobbies/board-games/${game.id}`}
+                class="group border-line hover:border-signal grid grid-cols-[1fr_auto] items-center gap-4 border-b py-5 transition-colors sm:gap-6"
+              >
+                <span class="min-w-0">
+                  <span class="font-display text-ink group-hover:text-signal block text-lg transition-colors">
+                    {game.data.title}
+                  </span>
+                  <span class="text-ink-soft mt-1 block text-sm">{game.data.summary}</span>
+                </span>
+                <span class="flex items-center gap-4">
+                  <span class="text-ink-soft hidden font-mono text-[11px] sm:block">
+                    {game.data.minPlayers}–{game.data.maxPlayers} players · {game.data.playTime}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="text-ink-soft group-hover:text-signal transition-all group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="text-ink-soft py-6 leading-relaxed">
+            No games added yet. Start your shelf with the
+            <a href="/templates/board-game.md" download class="text-signal hover:underline">
+              board game starter template
+            </a>
+            .
+          </p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const recipes = await getCollection('recipes', ({ data }) => !data.draft);
+const boardGames = await getCollection('boardGames', ({ data }) => !data.draft);
+const wines = await getCollection('wines', ({ data }) => !data.draft);
+---
+
+<BaseLayout
+  title="Hobbies"
+  description="A few things I enjoy away from the keyboard: recipes, board games, and wine."
+>
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
+    <p class="text-ink-soft mb-6 font-mono text-xs tracking-[0.2em] uppercase">
+      A little off the clock
+    </p>
+
+    <div class="grid gap-10 md:grid-cols-[1fr_16rem] md:items-end">
+      <h1 class="font-display text-ink max-w-3xl text-5xl leading-[1.05] font-medium sm:text-7xl">
+        Good food, good games, good company.
+      </h1>
+      <p class="text-ink-soft max-w-sm leading-relaxed">
+        A few things I enjoy away from the keyboard: recipes worth making again, board games worth
+        bringing to the table, and wine worth remembering.
+      </p>
+    </div>
+
+    <div class="mt-16">
+      <SectionHeading eyebrow="Things I enjoy" count={3} />
+
+      <div class="grid gap-4 md:grid-cols-3">
+        <a
+          href="/hobbies/food"
+          class="group border-line hover:border-signal bg-surface flex min-h-64 flex-col border p-6 transition-colors"
+        >
+          <span class="text-signal font-mono text-xs">01 / COOKING</span>
+          <span
+            class="font-display text-ink group-hover:text-signal mt-10 text-3xl transition-colors"
+          >
+            Recipes
+          </span>
+          <span class="text-ink-soft mt-3 leading-relaxed">
+            A growing collection of dishes, notes, and things I want to make again.
+          </span>
+          <span class="text-signal mt-auto pt-8 font-mono text-xs">
+            Browse {recipes.length}
+            {recipes.length === 1 ? ' recipe' : ' recipes'}
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a
+          href="/hobbies/board-games"
+          class="group border-line hover:border-signal bg-surface flex min-h-64 flex-col border p-6 transition-colors"
+        >
+          <span class="text-signal font-mono text-xs">02 / GAME NIGHT</span>
+          <span
+            class="font-display text-ink group-hover:text-signal mt-10 text-3xl transition-colors"
+          >
+            Board games
+          </span>
+          <p class="text-ink-soft mt-3 leading-relaxed">
+            Clever turns, friendly competition, and the games that bring everyone to the table.
+          </p>
+          <span class="text-signal mt-auto pt-8 font-mono text-xs">
+            Browse {boardGames.length}
+            {boardGames.length === 1 ? ' game' : 'games'}
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a
+          href="/hobbies/wine"
+          class="group border-line hover:border-signal bg-surface flex min-h-64 flex-col border p-6 transition-colors"
+        >
+          <span class="text-signal font-mono text-xs">03 / TASTING NOTES</span>
+          <span
+            class="font-display text-ink group-hover:text-signal mt-10 text-3xl transition-colors"
+          >
+            Wine
+          </span>
+          <p class="text-ink-soft mt-3 leading-relaxed">
+            Bottles to remember, flavors to explore, and the occasional pairing worth repeating.
+          </p>
+          <span class="text-signal mt-auto pt-8 font-mono text-xs">
+            Browse {wines.length}
+            {wines.length === 1 ? ' wine' : 'wines'}
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
