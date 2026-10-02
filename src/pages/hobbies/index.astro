@@ -66,7 +66,7 @@ const wines = await getCollection('wines', ({ data }) => !data.draft);
           </p>
           <span class="text-signal mt-auto pt-8 font-mono text-xs">
             Browse {boardGames.length}
-            {boardGames.length === 1 ? ' game' : 'games'}
+            {boardGames.length === 1 ? ' game' : ' games'}
             <span aria-hidden="true">→</span>
           </span>
         </a>
@@ -86,7 +86,7 @@ const wines = await getCollection('wines', ({ data }) => !data.draft);
           </p>
           <span class="text-signal mt-auto pt-8 font-mono text-xs">
             Browse {wines.length}
-            {wines.length === 1 ? ' wine' : 'wines'}
+            {wines.length === 1 ? ' wine' : ' wines'}
             <span aria-hidden="true">→</span>
           </span>
         </a>
