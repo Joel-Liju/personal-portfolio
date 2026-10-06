@@ -1,2 +1,6 @@
 allowBuilds:
   esbuild: false
+  workerd: false
+minimumReleaseAgeExclude:
+  - '@astrojs/cloudflare@14.3.4'
+  - '@astrojs/internal-helpers@0.12.0'
