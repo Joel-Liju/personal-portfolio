@@ -2,7 +2,7 @@
 // and SEO defaults all read from here instead of hardcoding copy.
 export const SITE = {
   name: 'Joel Jacob',
-  role: 'Software engineer and solution architect',
+  role: 'Software engineer',
   email: 'joelliju10@gmail.com',
   description:
     'Portfolio of Joel Jacob — backend and full-stack software engineering, with an emphasis on reliability, clarity, and the details most people skip.',

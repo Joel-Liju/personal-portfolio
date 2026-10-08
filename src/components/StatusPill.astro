@@ -37,6 +37,9 @@ const {
 </div>
 
 <script is:inline define:vars={{ latitude, longitude, timezone }}>
+  const weatherCacheKey = `status-pill-weather-${latitude}-${longitude}`;
+  const weatherCacheTtl = 10 * 60 * 1000;
+
   function getWeatherEmoji(code) {
   // Clear sky
   if (code === 0) return "☀️";
@@ -81,33 +84,70 @@ const {
   // Default fallback
   return "🌡️";
 }
+  function renderStatus(temperature, weatherCode) {
+    const weatherEmoji = getWeatherEmoji(weatherCode);
+    const localTime = new Date().toLocaleTimeString("en-US", {
+      timeZone: timezone,
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const target = document.getElementById("weather-timestamp");
+
+    if (target) {
+      target.innerText = `(${temperature}°C ${weatherEmoji}, ${localTime})`;
+    }
+  }
+
   async function updateStatus() {
+    let cachedStatus;
+
+    try {
+      cachedStatus = JSON.parse(sessionStorage.getItem(weatherCacheKey) || "null");
+    } catch (error) {
+      console.warn("Failed to read cached status widget data:", error);
+    }
+
+    if (cachedStatus) {
+      renderStatus(cachedStatus.temperature, cachedStatus.weatherCode);
+      if (Date.now() - cachedStatus.cachedAt < weatherCacheTtl) {
+        return;
+      }
+    }
+
     try {
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&temperature_unit=celsius`
       );
+      if (!response.ok) {
+        throw new Error(`Weather request failed with status ${response.status}`);
+      }
+
       const data = await response.json();
+      const status = {
+        temperature: Math.round(data.current.temperature_2m),
+        weatherCode: data.current.weather_code,
+        cachedAt: Date.now(),
+      };
 
-      const tempC = Math.round(data.current.temperature_2m);
-      const weatherCode = data.current.weather_code;
-      const weatherEmoji = getWeatherEmoji(weatherCode);
-
-      const localTime = new Date().toLocaleTimeString("en-US", {
-        timeZone: timezone,
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      });
-
-      const target = document.getElementById("weather-timestamp");
-      if (target) {
-        target.innerText = `(${tempC}°C ${weatherEmoji}, ${localTime})`;
+      renderStatus(status.temperature, status.weatherCode);
+      try {
+        sessionStorage.setItem(weatherCacheKey, JSON.stringify(status));
+      } catch (error) {
+        console.warn("Failed to cache status widget data:", error);
       }
     } catch (error) {
       console.error("Failed to load status widget data:", error);
+      if (!cachedStatus) {
+        const target = document.getElementById("weather-timestamp");
+        if (target) {
+          target.innerText = "(Weather unavailable)";
+        }
+      }
     }
   }
 
+  document.addEventListener("astro:page-load", updateStatus);
   updateStatus();
 </script>
 

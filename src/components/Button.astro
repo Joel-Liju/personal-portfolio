@@ -1,7 +1,7 @@
 ---
 interface Props {
   href?: string;
-  variant?: 'solid' | 'ghost';
+  variant?: 'solid' | 'ghost' | 'accent';
   class?: string;
 }
 
@@ -12,6 +12,7 @@ const base =
 const variants = {
   solid: 'bg-ink text-paper hover:bg-signal',
   ghost: 'border border-line text-ink hover:border-signal hover:text-signal',
+  accent: 'border-2 border-signal bg-surface text-ink hover:border-ink hover:bg-ink hover:text-paper',
 };
 
 const classes = [base, variants[variant], className].filter(Boolean).join(' ');
