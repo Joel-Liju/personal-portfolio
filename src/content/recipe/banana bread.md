@@ -1,6 +1,6 @@
 ---
 title: Banana Bread
-summary: This is a banana bread stuff.
+summary: The recipe for the best banana bread, I have ever had.
 date: 2026-05-01
 prepTime: 15 minutes
 cookTime: 1 hour 00 minutes

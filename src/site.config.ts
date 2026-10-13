@@ -3,7 +3,7 @@
 export const SITE = {
   name: 'Joel Jacob',
   role: 'Software engineer',
-  email: 'joelliju10@gmail.com',
+  email: 'hello@joellijujacob.com',
   description:
     'Portfolio of Joel Jacob — backend and full-stack software engineering, with an emphasis on reliability, clarity, and the details most people skip.',
   status: 'Currently seeking new opportunities — open to full-time, contract, and freelance work.',
