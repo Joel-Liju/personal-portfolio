@@ -1,10 +1,17 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { BriefcaseBusiness, CodeXml, Mail } from '@lucide/astro';
+import { BriefcaseBusiness, CodeXml, Mail, MessageCircle } from '@lucide/astro';
 import { SITE } from '@/site.config';
+
+const whatsappMessage = `Hi ${SITE.name}, I came across your portfolio and would love to get in touch.`;
 
 const contactMethods = [
   { label: 'Email', href: `mailto:${SITE.email}`, Icon: Mail },
+  {
+    label: 'WhatsApp',
+    href: `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`,
+    Icon: MessageCircle,
+  },
   ...SITE.social.map(({ label, href }) => ({
     label,
     href,
