@@ -5,13 +5,28 @@ import { SITE, NAV_LINKS } from '@/site.config';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-line bg-paper/90 sticky top-0 z-40 border-b backdrop-blur">
-  <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
+<header data-site-header class="site-header border-line bg-paper/90 sticky top-0 z-40 border-b backdrop-blur">
+  <div class="header-inner mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
     <a href="/" class="font-display text-ink text-lg font-medium">
       {SITE.name}
     </a>
 
-    <nav class="flex items-center gap-5" aria-label="Primary">
+    <button
+      type="button"
+      class="menu-toggle border-line text-ink-soft hover:border-signal hover:text-signal"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      data-menu-toggle
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+        <path class="menu-line menu-line--top" d="M4 7h16"></path>
+        <path class="menu-line menu-line--middle" d="M4 12h16"></path>
+        <path class="menu-line menu-line--bottom" d="M4 17h16"></path>
+      </svg>
+    </button>
+
+    <nav id="primary-navigation" class="primary-navigation flex items-center gap-5" aria-label="Primary">
       {
         NAV_LINKS.map((link) => {
           const isActive = currentPath === link.href || currentPath.startsWith(`${link.href}/`);
@@ -33,3 +48,141 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
+
+<script>
+  function initMobileMenu() {
+    const header = document.querySelector<HTMLElement>('[data-site-header]');
+    const toggle = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const navigation = header?.querySelector<HTMLElement>('#primary-navigation');
+    if (!header || !toggle || !navigation || toggle.dataset.bound) return;
+    toggle.dataset.bound = 'true';
+
+    const closeMenu = () => {
+      header.removeAttribute('data-menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+    };
+
+    toggle.addEventListener('click', () => {
+      const isOpen = header.getAttribute('data-menu-open') === 'true';
+      if (isOpen) {
+        closeMenu();
+        return;
+      }
+      header.setAttribute('data-menu-open', 'true');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close navigation menu');
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) closeMenu();
+    });
+
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    window.matchMedia('(min-width: 48rem)').addEventListener('change', closeMenu);
+  }
+
+  initMobileMenu();
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>
+
+<style>
+  .menu-toggle {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-line);
+    border-radius: 9999px;
+    background: transparent;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  .menu-toggle svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .menu-line {
+    transform-origin: center;
+    transition:
+      transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 160ms ease;
+  }
+
+  [data-menu-open='true'] .menu-line--top {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  [data-menu-open='true'] .menu-line--middle {
+    opacity: 0;
+  }
+
+  [data-menu-open='true'] .menu-line--bottom {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  @media (max-width: 47.999rem) {
+    .header-inner {
+      flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .primary-navigation {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      opacity: 0;
+      transform: translateY(-0.4rem);
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        max-height 360ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        opacity 220ms ease 70ms,
+        transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1) 70ms,
+        padding 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        visibility 0s linear 360ms;
+    }
+
+    [data-menu-open='true'] .primary-navigation {
+      max-height: 20rem;
+      padding: 0.5rem 0 0.25rem;
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s, 70ms, 70ms, 0s, 0s;
+    }
+
+    .primary-navigation a {
+      padding: 0.75rem 0;
+    }
+
+    .primary-navigation [data-theme-toggle] {
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle,
+    .menu-line,
+    .primary-navigation {
+      transition: none;
+    }
+  }
+</style>

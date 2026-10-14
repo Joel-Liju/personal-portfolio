@@ -21,9 +21,106 @@ const { title, description = SITE.description, image = '/og-image.png' } = Astro
   </head>
   <body id="top" class="bg-paper text-ink">
     <Header />
-    <main>
+    <main class="site-main">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<script>
+  let pageRevealObserver: IntersectionObserver | undefined;
+  let revealFrame = 0;
+
+  function collectRevealUnits(element: HTMLElement, depth = 0): HTMLElement[] {
+    const children = Array.from(element.children).filter(
+      (child): child is HTMLElement => child instanceof HTMLElement
+    );
+    if (children.length === 0) return [element];
+
+    if (
+      element.classList.contains('prose') ||
+      element.classList.contains('grid') ||
+      element.tagName === 'UL' ||
+      element.tagName === 'OL'
+    ) {
+      return children.flatMap((child) => collectRevealUnits(child, depth + 1));
+    }
+
+    const sameTagGroup =
+      children.length > 1 &&
+      children.every((child) => child.tagName === children[0].tagName) &&
+      ['A', 'DIV', 'LI'].includes(children[0].tagName);
+    if (sameTagGroup) {
+      return children.flatMap((child) => collectRevealUnits(child, depth + 1));
+    }
+
+    if (depth < 3 && element.tagName === 'DIV' && children.length > 1) {
+      return children.flatMap((child) => collectRevealUnits(child, depth + 1));
+    }
+
+    if (
+      depth < 3 &&
+      children.length === 1 &&
+      (children[0].tagName === 'DIV' || children[0].classList.contains('grid'))
+    ) {
+      return collectRevealUnits(children[0], depth + 1);
+    }
+
+    return [element];
+  }
+
+  function revealPassedTargets() {
+    if (revealFrame) return;
+    revealFrame = window.requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLElement>('.site-main [data-reveal]').forEach((target) => {
+        if (target.getBoundingClientRect().top < window.innerHeight * 1.1) {
+          target.classList.add('is-visible');
+        }
+      });
+      revealFrame = 0;
+    });
+  }
+
+  function initPageReveals() {
+    const main = document.querySelector<HTMLElement>('.site-main');
+    if (!main || !('IntersectionObserver' in window)) return;
+
+    main.querySelectorAll<HTMLElement>(':scope > section, :scope > article').forEach((block) => {
+      if (block.querySelector('[data-reveal]')) return;
+
+      const units = Array.from(block.children).flatMap((child) =>
+        child instanceof HTMLElement ? collectRevealUnits(child) : []
+      );
+      units.forEach((unit, index) => {
+        unit.dataset.reveal = '';
+        unit.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 55}ms`);
+      });
+    });
+
+    const targets = main.querySelectorAll<HTMLElement>('[data-reveal]');
+    document.documentElement.classList.add('motion-ready');
+    pageRevealObserver?.disconnect();
+
+    pageRevealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    targets.forEach((target) => pageRevealObserver?.observe(target));
+    revealPassedTargets();
+  }
+
+  window.addEventListener('scroll', revealPassedTargets, { passive: true });
+  window.addEventListener('resize', revealPassedTargets, { passive: true });
+  document.addEventListener('astro:before-swap', () => pageRevealObserver?.disconnect());
+  initPageReveals();
+  document.addEventListener('astro:page-load', initPageReveals);
+</script>
