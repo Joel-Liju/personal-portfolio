@@ -1,6 +1,6 @@
 ---
 title: Dominion (Second Edition)
-summary: The classic deck-building game, updated. Start with identical decks, acquire cards each turn, and build the most efficient engine to claim the most Victory Points.
+summary: The definitive deck-builder. Start with identical decks, acquire cards each turn, and build the most efficient engine to claim the most Victory Points.
 date: 2016-01-01
 minPlayers: 2
 maxPlayers: 4
