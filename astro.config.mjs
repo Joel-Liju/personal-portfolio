@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // Replace with your production URL after deploying to Vercel / Netlify.
 // It powers the sitemap and the canonical / Open Graph URLs in BaseLayout.
-const SITE_URL = 'https://astro-starter-portfolio.vercel.app';
+const SITE_URL = 'https://joellijujacob.com';
 
 export default defineConfig({
   site: SITE_URL,
