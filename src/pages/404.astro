@@ -15,30 +15,109 @@ import Button from '@/components/Button.astro';
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
         <Button href="/" variant="solid">Back to home <span aria-hidden="true">→</span></Button>
-        <Button href="/hobbies/board-games" variant="ghost">Browse board games</Button>
+        <a
+          href="/hobbies"
+          class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-signal hover:text-signal"
+          data-random-destination
+        >
+          Explore hobbies →
+        </a>
       </div>
     </div>
 
-    <div class="game-board" aria-hidden="true">
+    <div class="game-board" data-destination-board aria-hidden="true">
       <div class="board-topline">
         <span>THE DETOUR</span>
-        <span>MOVE 04</span>
+        <span data-destination-category>404 / LOST</span>
       </div>
       <div class="board-grid">
         <div class="board-tile board-tile--start"><span>START</span><span>01</span></div>
         <div class="board-tile"><span>02</span></div>
         <div class="board-tile board-tile--marked"><span>03</span><span class="pawn">♟</span></div>
         <div class="board-tile"><span>05</span></div>
-        <div class="board-tile board-tile--lost"><span>OH NO</span><strong>404</strong></div>
+        <div class="board-tile board-tile--lost">
+          <span data-destination-label>OH NO</span>
+          <strong data-destination-icon>404</strong>
+        </div>
         <div class="board-tile"><span>04</span></div>
         <div class="board-tile"><span>06</span></div>
         <div class="board-tile"><span>07</span></div>
-        <div class="board-tile board-tile--finish"><span>HOME</span><span>→</span></div>
+        <div class="board-tile board-tile--finish">
+          <span data-destination-short>HOME</span>
+          <span>→</span>
+        </div>
       </div>
-      <p class="board-caption">A small detour. No points deducted.</p>
+      <p class="board-caption" data-destination-caption>A small detour. No points deducted.</p>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const destinations = [
+    {
+      href: '/work',
+      label: 'selected work',
+      category: 'BUILD',
+      short: 'WORK',
+      icon: '✦',
+      theme: 'work',
+    },
+    {
+      href: '/hobbies/board-games',
+      label: 'board games',
+      category: 'GAME NIGHT',
+      short: 'PLAY',
+      icon: '♟',
+      theme: 'games',
+    },
+    {
+      href: '/hobbies/food',
+      label: 'recipes',
+      category: 'COOKING',
+      short: 'BAKE',
+      icon: '♨',
+      theme: 'recipes',
+    },
+    {
+      href: '/hobbies/wine',
+      label: 'wine notes',
+      category: 'TASTING NOTES',
+      short: 'SIP',
+      icon: '✳',
+      theme: 'wine',
+    },
+    {
+      href: '/about',
+      label: 'about me',
+      category: 'A LITTLE ABOUT ME',
+      short: 'MEET',
+      icon: '☺',
+      theme: 'about',
+    },
+  ] as const;
+
+  const destinationLink = document.querySelector<HTMLAnchorElement>('[data-random-destination]');
+  const board = document.querySelector<HTMLElement>('[data-destination-board]');
+  const category = board?.querySelector<HTMLElement>('[data-destination-category]');
+  const label = board?.querySelector<HTMLElement>('[data-destination-label]');
+  const icon = board?.querySelector<HTMLElement>('[data-destination-icon]');
+  const short = board?.querySelector<HTMLElement>('[data-destination-short]');
+  const caption = board?.querySelector<HTMLElement>('[data-destination-caption]');
+
+  if (!destinationLink || !board || !category || !label || !icon || !short || !caption) {
+    throw new Error('404 destination guide is missing required elements.');
+  }
+
+  const destination = destinations[Math.floor(Math.random() * destinations.length)];
+  destinationLink.href = destination.href;
+  destinationLink.textContent = `Try ${destination.label} →`;
+  category.textContent = destination.category;
+  label.textContent = 'NEXT UP';
+  icon.textContent = destination.icon;
+  short.textContent = destination.short;
+  caption.textContent = `Your next stop: ${destination.label}.`;
+  board.dataset.theme = destination.theme;
+</script>
 
 <style>
   .game-board {
@@ -103,6 +182,28 @@ import Button from '@/components/Button.astro';
     font-size: clamp(1.75rem, 7vw, 2.5rem);
     font-weight: 500;
     line-height: 1;
+  }
+
+  .game-board[data-theme='work'] .board-tile--lost {
+    border-radius: 0.25rem;
+  }
+
+  .game-board[data-theme='games'] .board-tile--lost {
+    transform: rotate(-8deg) scale(1.04);
+  }
+
+  .game-board[data-theme='recipes'] .board-tile--lost {
+    border-radius: 50%;
+  }
+
+  .game-board[data-theme='wine'] .board-tile--lost {
+    border-radius: 50% 50% 0.75rem 0.75rem;
+  }
+
+  .game-board[data-theme='about'] .board-tile--lost {
+    border-radius: 50%;
+    background: var(--color-paper);
+    color: var(--color-signal);
   }
 
   .board-tile--marked {
