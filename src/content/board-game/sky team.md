@@ -17,7 +17,7 @@ url: https://boardgamegeek.com/boardgame/373106/sky-team
 draft: false # Change to false when the entry is ready to publish.
 ---
 
-## What I like about it
+## Honest review
 
 It is genuienly a good two player cooperative game that people can enjoy. Especially, it is a good game if you like to learn how to communicate without actually using any words. This I argue is the fun part of the game, where you just have to trust that you and your teammates are on the same page, and hope that you don't mess up.
 

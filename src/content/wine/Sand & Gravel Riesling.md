@@ -9,8 +9,8 @@ region: Niagara
 vintage: 2024
 rating: 3
 tags:
-  - red
-url: https://example.com/
+  - white
+url: https://ravinevineyard.com/products/2024-sand-gravel-riesling
 draft: false # Change to false when the entry is ready to publish.
 ---
 

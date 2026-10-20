@@ -5,7 +5,7 @@ date: 2026-05-01
 prepTime: 15 minutes
 cookTime: 1 hour 00 minutes
 servings: 12
-Rating(5): 4
+rating: 4
 url: https://www.allrecipes.com/recipe/20144/banana-banana-bread
 description:
   - Dessert
@@ -45,3 +45,11 @@ Fiber : 1 g
 - For the best flavor and moisture, use highly speckled or completely brown bananas.
 - You can add 1/2 cup of chopped walnuts, pecans, or chocolate chips to the batter before baking if desired.
 - Store wrapped tightly in plastic wrap at room temperature for up to 4 days, or freeze for up to 3 months.
+
+## What I liked
+
+It was a good start, and the variation with chocolate chips were amazing. It has an interesting color when it is fully baked.
+
+## What I would do differently
+
+The only thing I would change in the future is making it less liquidy, as when it is done baking it actually is so dense.

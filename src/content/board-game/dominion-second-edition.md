@@ -15,7 +15,7 @@ tags:
 draft: false
 ---
 
-## What I like about it
+## Honest review
 
 It is one of my favorite board games, with a lot of interesting combinations of expansions that keep adding depth of strategy to the overall game. In Dominion, you are a monarch in a small, pleasant kingdom of rivers and evergreens, but you want a bigger dominion. Each player starts with an identical deck of cards and, through the course of the game, acquires more cards to build a more efficient deck, ultimately aiming to accumulate the most Victory Points by the time the game ends.
 

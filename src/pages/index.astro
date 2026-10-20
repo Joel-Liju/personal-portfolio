@@ -16,23 +16,35 @@ const selected = [...featured, ...rest].slice(0, 5);
 
 <BaseLayout title={SITE.name}>
   <div class="home-page">
-    <section class="home-hero mx-auto max-w-5xl px-6 pt-16 pb-20 sm:pt-18">
-      <p class="hero-enter text-ink-soft mb-6 inline-flex items-center gap-2 font-mono text-xs">
-        <StatusPill />
-      </p>
+    <section class="home-hero mx-auto grid max-w-5xl items-center gap-10 px-6 pt-12 pb-20 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-16">
+      <div>
+        <p class="hero-enter text-ink-soft mb-6 inline-flex items-center gap-2 font-mono text-xs">
+          <StatusPill />
+        </p>
 
-      <h1 class="hero-enter hero-title font-display text-ink max-w-4xl text-6xl leading-none font-medium sm:text-8xl">
-        A <span class="tagline-wavy inline-block transition-transform duration-300 ease-out hover:-translate-y-1 hover:decoration-signal/80 underline decoration-signal decoration-wavy decoration-2 underline-offset-4 cursor-pointer"><a href="/work">problem-solver</a></span> and a <span class="tagline-dotted inline-block transition-all duration-300 ease-out hover:decoration-ink hover:tracking-wide underline decoration-ink/40 decoration-dotted decoration-2 underline-offset-4 cursor-pointer"><a href="/hobbies">chef</a></span>.
-      </h1>
+        <h1 class="hero-enter hero-title font-display text-ink max-w-4xl text-6xl leading-none font-medium sm:text-8xl">
+          A <span class="tagline-wavy inline-block transition-transform duration-300 ease-out hover:-translate-y-1 hover:decoration-signal/80 underline decoration-signal decoration-wavy decoration-2 underline-offset-4 cursor-pointer"><a href="/work">problem-solver</a></span> and a <span class="tagline-dotted inline-block transition-all duration-300 ease-out hover:decoration-ink hover:tracking-wide underline decoration-ink/40 decoration-dotted decoration-2 underline-offset-4 cursor-pointer"><a href="/hobbies">chef</a></span>.
+        </h1>
 
-      <p class="hero-enter hero-copy text-ink-soft mt-6 max-w-md">
-        {SITE.role}
-      </p>
+        <p class="hero-enter hero-copy text-ink-soft mt-6 max-w-md">
+          {SITE.role}
+        </p>
 
-      <div class="hero-enter hero-actions mt-8 flex flex-wrap items-center gap-3">
-        <Button href="/work" variant="solid">View the work →</Button>
-        <Button href="/contact" variant="accent">Say hello ↗</Button>
+        <div class="hero-enter hero-actions mt-8 flex flex-wrap items-center gap-3">
+          <Button href="/work" variant="solid">View the work →</Button>
+          <Button href="/contact" variant="accent">Say hello ↗</Button>
+        </div>
       </div>
+
+      <img
+        src="/Me.jpeg"
+        alt="Joel wearing a blue suit outdoors"
+        class="hero-enter hero-portrait border-line mx-auto aspect-[4/5] w-full max-w-[19rem] rounded-[2rem] border object-cover object-center shadow-xl lg:rotate-2"
+        width="727"
+        height="1024"
+        fetchpriority="high"
+        decoding="async"
+      />
     </section>
 
     <section id="work" class="mx-auto max-w-5xl px-6 pb-20">
@@ -77,7 +89,7 @@ const selected = [...featured, ...rest].slice(0, 5);
         <SectionHeading eyebrow="Let's talk" />
       </div>
       <p data-reveal class="font-display text-ink max-w-lg text-2xl sm:text-3xl">
-        Have something worth building?
+        Looking for a software engineer? Let’s talk.
       </p>
       <a
         data-reveal
@@ -117,6 +129,10 @@ const selected = [...featured, ...rest].slice(0, 5);
 
   .hero-actions {
     animation-delay: 260ms;
+  }
+
+  .hero-portrait {
+    animation-delay: 340ms;
   }
 
   @media (prefers-reduced-motion: reduce) {

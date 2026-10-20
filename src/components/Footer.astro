@@ -1,7 +1,20 @@
 ---
 import { SITE } from '@/site.config';
+import { ArrowUpRight, BriefcaseBusiness, CodeXml, Mail, MessageCircle } from '@lucide/astro';
 
 const year = new Date().getFullYear();
+const whatsappMessage = `Hi ${SITE.name}, I came across your portfolio and would love to get in touch.`;
+const footerLinks = [
+  { label: 'GitHub', href: SITE.social[0].href, Icon: CodeXml, external: true },
+  { label: 'LinkedIn', href: SITE.social[1].href, Icon: BriefcaseBusiness, external: true },
+  { label: 'Email', href: `mailto:${SITE.email}`, Icon: Mail, external: false },
+  {
+    label: 'WhatsApp',
+    href: `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`,
+    Icon: MessageCircle,
+    external: true,
+  },
+];
 ---
 
 <footer class="border-line border-t">
@@ -10,15 +23,25 @@ const year = new Date().getFullYear();
   >
     <p>© {year} {SITE.name}</p>
 
-    <nav class="flex items-center gap-4" aria-label="Social">
+    <nav class="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Contact and social links">
       {
-        SITE.social.map((link) => (
-          <a href={link.href} class="hover:text-signal transition-colors" rel="me">
-            {link.label}
+        footerLinks.map(({ label, href, Icon, external }) => (
+          <a
+            href={href}
+            class="group inline-flex min-h-9 items-center gap-1.5 text-ink-soft transition-colors duration-200 hover:text-signal focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
+            target={external ? '_blank' : undefined}
+            rel={external ? 'me noreferrer' : undefined}
+            aria-label={label === 'Email' ? `Email ${SITE.name}` : label}
+          >
+            <Icon aria-hidden="true" size={14} stroke-width={1.7} class="opacity-70 transition-opacity group-hover:opacity-100" />
+            <span>{label}</span>
+            <ArrowUpRight aria-hidden="true" size={11} class="-translate-y-px opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-70" />
           </a>
         ))
       }
-      <a href="#top" class="hover:text-signal transition-colors"> Top ↑ </a>
+      <a href="#top" class="inline-flex min-h-9 items-center text-ink-soft transition-colors hover:text-signal focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
+        Top ↑
+      </a>
     </nav>
   </div>
 </footer>

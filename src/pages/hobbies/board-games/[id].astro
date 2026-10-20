@@ -18,7 +18,7 @@ interface Props {
 const { entry } = Astro.props;
 const { title, summary, date, minPlayers, maxPlayers, playTime, complexity, tags, url } =
   entry.data;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -34,27 +34,53 @@ const { Content } = await render(entry);
     <h1 class="font-display text-ink mt-3 max-w-2xl text-4xl font-medium sm:text-5xl">{title}</h1>
     <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">{summary}</p>
 
-    <dl
-      class="border-line text-ink-soft mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y py-4 font-mono text-xs"
-    >
-      <div>
-        <dt class="inline">Players — </dt>
-        <dd class="inline">{minPlayers}–{maxPlayers}</dd>
+    <dl class="border-line mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border bg-line sm:grid-cols-4">
+      <div class="bg-surface px-4 py-4 sm:px-5">
+        <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-wide">Players</dt>
+        <dd class="font-display text-ink mt-1 text-lg">{minPlayers}–{maxPlayers}</dd>
       </div>
-      <div><dt class="inline">Play time — </dt><dd class="inline">{playTime}</dd></div>
-      <div><dt class="inline">Complexity — </dt><dd class="inline">{complexity}</dd></div>
-      <div><dt class="inline">Added — </dt><dd class="inline">{formatDate(date)}</dd></div>
-      {
-        tags.length > 0 && (
-          <div>
-            <dt class="inline">Tags — </dt>
-            <dd class="inline">{tags.join(', ')}</dd>
-          </div>
-        )
-      }
+      <div class="bg-surface px-4 py-4 sm:px-5">
+        <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-wide">Play time</dt>
+        <dd class="font-display text-ink mt-1 text-lg">{playTime}</dd>
+      </div>
+      <div class="bg-surface px-4 py-4 sm:px-5">
+        <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-wide">Complexity</dt>
+        <dd class="font-display text-ink mt-1 text-lg">{complexity}</dd>
+      </div>
+      <div class="bg-surface px-4 py-4 sm:px-5">
+        <dt class="text-ink-soft font-mono text-[11px] uppercase tracking-wide">Added</dt>
+        <dd class="font-display text-ink mt-1 text-lg">{formatDate(date)}</dd>
+      </div>
     </dl>
 
-    <div class="prose prose-sm sm:prose-base mt-10 max-w-2xl">
+    {tags.length > 0 && (
+      <ul class="mt-4 flex flex-wrap gap-2" aria-label="Game tags">
+        {tags.map((tag) => (
+          <li class="border-line text-ink-soft rounded-full border bg-surface/70 px-3 py-1 font-mono text-[11px]">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {headings.length > 0 && (
+      <nav class="mt-8" aria-label="Page sections">
+        <ul class="flex flex-wrap gap-2">
+          {headings.map((heading) => (
+            <li>
+              <a
+                href={`#${heading.slug}`}
+                class="border-line text-ink-soft hover:border-signal hover:text-signal inline-flex rounded-full border px-3 py-2 font-mono text-xs transition-colors"
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="prose prose-sm sm:prose-base mt-10 max-w-3xl">
       <Content />
     </div>
 

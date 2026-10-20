@@ -13,7 +13,7 @@ url: https://boardgamegeek.com/
 draft: true # Change to false when the entry is ready to publish.
 ---
 
-## What I like about it
+## Honest review
 
 What makes this game fun to bring to the table?
 
