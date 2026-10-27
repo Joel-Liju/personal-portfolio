@@ -26,7 +26,7 @@ const formattedDate = formatDate(date);
 <BaseLayout title={title} description={summary}>
   <article class="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24">
     <a href="/work" class="text-ink-soft hover:text-signal font-mono text-xs transition-colors">
-      ← All work
+      ← All projects
     </a>
 
     <h1 class="font-display text-ink mt-6 max-w-2xl text-3xl font-medium sm:text-4xl">
@@ -80,14 +80,14 @@ const formattedDate = formatDate(date);
       {
         url && (
           <Button href={url} variant="solid">
-            Visit live →
+            View live project →
           </Button>
         )
       }
       {
         repo && (
           <Button href={repo} variant="ghost">
-            View source
+            View source code
           </Button>
         )
       }

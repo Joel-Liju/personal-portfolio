@@ -1,6 +1,6 @@
 ---
 title: Hack the North
-summary: A chrome extension created to help users to skim through GitHub ReadMe and makes it easier for users to navigate.
+summary: My team built a Chrome extension to make long GitHub README files easier to navigate.
 role: Coder
 date: 2023-3-23
 tags: [JavaScript, Open Source, Chrome Extension]

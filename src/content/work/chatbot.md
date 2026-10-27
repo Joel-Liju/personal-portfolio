@@ -1,6 +1,6 @@
 ---
 title: Capstone project
-summary: A chatbot that can answer questions about both the Canada Games that took place in Niagara and classes at Brock university.
+summary: For my capstone, I helped build a chatbot for two different knowledge sources -> Brock courses and the Niagara 2022 Canada Games.
 role: Full Stack / DevOps
 date: 2022-05-01
 tags: [Python, Docker, Flask, React]
@@ -8,7 +8,6 @@ repo: https://github.com/janecekm/COSC4P02Project2022
 featured: false
 draft: false
 ---
-https://github.com/Joel-Liju/HackTheNorthProject
 This project was the capstone project for my schooling. Specifically, we were required to create a chatbot which can answer the questions about the Brock University courses, and also about the [Canada Games 2022](https://www.canadagames.ca/previous-games/niagara-2022) which took place in Niagara.
 
 This was the first time I was exposed to Docker, DevOps and backend in general, however, I found that it is something I absolutely enjoy when I started to build out the pipeline for hosting the application in Heroku. This application has now been taken down by Heroku due to lack of use. 

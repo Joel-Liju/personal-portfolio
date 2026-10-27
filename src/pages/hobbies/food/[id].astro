@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, summary, date, tags, prepTime, cookTime, servings, rating, url } = entry.data;
+const { title, summary, date, description, prepTime, cookTime, servings, rating, url } = entry.data;
 const { Content, headings } = await render(entry);
 const formattedDate = formatDate(date);
 ---
@@ -61,11 +61,11 @@ const formattedDate = formatDate(date);
       )}
     </dl>
 
-    {tags.length > 0 && (
+    {description.length > 0 && (
       <ul class="mt-4 flex flex-wrap gap-2" aria-label="Recipe tags">
-        {tags.map((tag) => (
+        {description.map((desc) => (
           <li class="border-line text-ink-soft rounded-full border bg-surface/70 px-3 py-1 font-mono text-[11px]">
-            {tag}
+            {desc}
           </li>
         ))}
       </ul>

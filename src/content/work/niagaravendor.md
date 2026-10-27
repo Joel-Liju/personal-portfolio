@@ -1,6 +1,6 @@
 ---
 title: Niagara College Career Fair Form
-summary: Website created for Niagara College, where companies can sign up for the career fair hosted at Niagara College.
+summary: I rebuilt the career fair registration experience and added a dashboard to help organizers track registrations, attendance, food requests, and fundraising.
 role: Software Developer
 date: 2025-10-12
 tags: [Azure DevOps, SQL Server, .Net, Axe DevTools]

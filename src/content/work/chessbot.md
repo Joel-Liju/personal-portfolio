@@ -1,6 +1,6 @@
 ---
 title: Chess Game
-summary: A project in School, where the aim is to duplicate the AI behind a chess engine using alpha beta pruning.
+summary: I built a chess engine for a school project and learned firsthand how search depth and memory use shape performance.
 role: Software Developer
 date: 2020-12-23
 tags: [Java, AI, Java GUI]

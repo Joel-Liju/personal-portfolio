@@ -1,6 +1,6 @@
 ---
 title: Banana Bread
-summary: The recipe for the best banana bread, I have ever had.
+summary: A buttery banana loaf made with plenty of overripe bananas, with an appealing golden-brown finish and easy chocolate-chip or nut variations.
 date: 2026-05-01
 prepTime: 15 minutes
 cookTime: 1 hour 00 minutes
@@ -48,7 +48,7 @@ Fiber : 1 g
 
 ## What I liked
 
-It was a good start, and the variation with chocolate chips were amazing. It has an interesting color when it is fully baked.
+The chocolate-chip variation was the standout: the chips made each slice feel extra special. I also loved the loaf's rich, golden-brown color once it was fully baked.
 
 ## What I would do differently
 

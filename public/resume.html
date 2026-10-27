@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joel Jacob — Resume</title>
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #eef9fc;
+    --ink: #161925;
+    --muted: #23395b;
+    --accent: #3685b5;
+    --rule: #89aae6;
+    --bg: #ffffff;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    --paper: #111722;
+    --ink: #f1f5fa;
+    --muted: #b3c1d2;
+    --accent: #83c2eb;
+    --rule: #3a4a60;
+    --bg: #1b2636;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: "Georgia", "Charter", serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.33;
+    font-size: 10pt;
+    font-variant-numeric: lining-nums;
+    -moz-font-feature-settings: "lnum";
+    -webkit-font-feature-settings: "lnum";
+    font-feature-settings: "lnum";
+  }
+
+  .page {
+    max-width: 8.5in;
+    margin: 24px auto;
+    background: var(--bg);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.4in 0.6in 0.35in;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.12);
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  @media screen {
+    html.dark body {
+      background: radial-gradient(ellipse at 50% 0%, #1a2635 0%, var(--paper) 68%);
+    }
+
+    html.dark .page {
+      border-color: var(--rule);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+  }
+
+  .screen-actions {
+    max-width: 8.5in;
+    margin: 16px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font: 10pt Arial, sans-serif;
+  }
+  .screen-actions a, .theme-toggle {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .screen-actions a:hover, .theme-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  .theme-toggle { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; padding: 0; }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .moon-icon { display: none; }
+  html.dark .sun-icon { display: none; }
+  html.dark .moon-icon { display: block; }
+
+  /* ---- Header ---- */
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 9px; margin-bottom: 15px; }
+
+  h1 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 20pt;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .role {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12pt;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+  }
+
+  .contact {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 8.8pt;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.2px;
+  }
+  .contact a { color: var(--muted); text-decoration: none; }
+  .contact a:hover { color: var(--accent); }
+  .contact .sep { color: var(--rule); margin: 0 6px; }
+
+  /* ---- Section headers ---- */
+  h2 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin: 9px 0 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---- Summary ---- */
+  .summary { margin-bottom: 0; }
+
+  /* ---- Experience ---- */
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; margin-top: 2px; }
+  .job-title {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11pt;
+    color: var(--ink);
+  }
+  .job-dates {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 8.8pt;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .job-context {
+    font-size: 9pt;
+    color: var(--muted);
+    font-style: italic;
+    margin: 2px 0 6px;
+  }
+  .subgroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 6px 0 3px;
+  }
+  .subgroup-name {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: var(--accent);
+  }
+  .subgroup-stack {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 8.8pt;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  ul { list-style: none; margin-bottom: 2px; }
+  li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 4px;
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.5em;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .tutor { margin-top: 6px; }
+  .tutor .job-title { font-size: 10pt; }
+  .tutor p { font-size: 9pt; color: var(--muted); margin-top: 2px; }
+
+  /* ---- Skills ---- */
+  .skills-grid { display: grid; grid-template-columns: 128px 1fr; row-gap: 6px; column-gap: 10px; align-items: baseline; }
+  .skills-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: var(--ink);
+  }
+  .skills-val { font-size: 10pt; line-height: 1.32; }
+
+  /* ---- Projects ---- */
+  .project { margin-bottom: 3.5px; }
+  .project-name {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: var(--ink);
+  }
+  .project-desc { font-size: 10pt; color: var(--ink); }
+
+  /* ---- Education ---- */
+  .edu { font-size: 10pt; }
+  .edu strong { font-family: "Helvetica Neue", Arial, sans-serif; }
+
+  a.link, .edu a { color: var(--accent); text-decoration: none; }
+  .edu a:hover { text-decoration: underline; }
+
+  @media print {
+    html, html.dark {
+      color-scheme: light;
+      --paper: #ffffff;
+      --ink: #1a1d24;
+      --muted: #5a6270;
+      --accent: #1f5c7a;
+      --rule: #d8dde4;
+      --bg: #ffffff;
+    }
+    body { background: #fff; }
+    .screen-actions { display: none; }
+    .page { margin: 0; box-shadow: none; max-width: 100%; padding: 0; border: 0; border-radius: 0; transition: none; }
+    @page { margin: 0.45in 0.5in; size: letter; }
+  }
+
+  @media screen and (max-width: 640px) {
+    .screen-actions { margin: 12px 16px 0; }
+    .page { margin: 12px 0; padding: 0.35in 0.3in; }
+    .contact { line-height: 1.7; }
+    .subgroup-stack { white-space: normal; text-align: right; }
+    .skills-grid { grid-template-columns: 1fr; row-gap: 2px; }
+    .skills-label:not(:first-child) { margin-top: 6px; }
+  }
+
+  /* Pagination control for multi-page */
+  section { break-inside: avoid; page-break-inside: avoid; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  .job-head { break-after: avoid; break-inside: avoid; }
+  .job-head + ul { break-before: avoid; }
+  li { break-inside: avoid; }
+  .project { break-inside: avoid; }
+  .edu { break-inside: avoid; }
+</style>
+</head>
+<body>
+<div class="screen-actions">
+  <a class="home-link" href="/">Home</a>
+  <button class="theme-toggle" type="button" aria-label="Switch between light and dark theme" title="Switch theme">
+    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41-1.41"></path></svg>
+    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
+  </button>
+  <a href="/resume.pdf" download>Download PDF</a>
+</div>
+<div class="page">
+
+  <header>
+    <h1>Joel Jacob</h1>
+    <div class="role">Software Engineer</div>
+    <div class="contact">
+      St. Catharines, ON
+      <span class="sep">|</span><a href="mailto:hello@joellijujacob.com">hello@joellijujacob.com</a>
+      <span class="sep">|</span><a href="tel:+14164759865">(416) 475-9865</a>
+      <span class="sep">|</span><a href="https://github.com/Joel-Liju">github.com/Joel-Liju</a>
+      <span class="sep">|</span><a href="https://www.linkedin.com/in/joel-liju-jacob">linkedin.com/in/joel-liju-jacob</a>
+    </div>
+  </header>
+
+  <section class="summary">
+    <p>Software Engineer with 3 years building backend and full-stack systems in C#/.NET and Java, plus React and Python. Built CI/CD pipelines that cut staging deploys to under 15 minutes and automated reporting used across academic departments. Looking for backend or full-stack roles where I can ship and automate.</p>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skills-label">Languages</div>
+      <div class="skills-val">Java, Python, C#, C++, JavaScript, SQL</div>
+      <div class="skills-label">Frameworks</div>
+      <div class="skills-val">React, PyTest, Selenium, PyTorch, Pandas, NumPy</div>
+      <div class="skills-label">Software &amp; Tech</div>
+      <div class="skills-val">Docker, Azure Pipelines, GitHub Actions</div>
+      <div class="skills-label">Platforms</div>
+      <div class="skills-val">Windows, Linux, Unix</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="job-head">
+      <span class="job-title">Programmer Analyst — Niagara College (ESS)</span>
+      <span class="job-dates">Welland, ON · Jul 2023 – Jun 2026</span>
+    </div>
+    <ul>
+      <li>Developed, debugged, and maintained automated reporting scripts for 4 departments (ITS, Enrolment, Finance, HR), cutting a manual reporting cycle of nearly 2 weeks down to a few minutes.</li>
+      <li>Architected a standardized CI/CD pipeline for the test environment, replacing a manual email-based approval chain that took 30 minutes to 2 days with one-click approvals, cutting staging deployment times to under 15 minutes.</li>
+      <li>Collaborated across business and tech teams to gather requirements and define clear acceptance criteria, consistently closing 20% more tickets per sprint than the team average.</li>
+    </ul>
+
+    <div class="job-head">
+      <span class="job-title">Junior Developer (Co-op) — Digital Garage, MTO</span>
+      <span class="job-dates">St. Catharines, ON · May 2022 – Aug 2022</span>
+    </div>
+    <ul>
+      <li>Delivered full-stack features for an internal web application using C#, React, and SQL in an Agile team; refactored repeated logic into shared functions and split overbloated functions into focused components to improve maintainability across the site.</li>
+      <li>Prototyped an automated Azure-based virus-scanning API for the data-ingestion pipeline, mitigating vulnerabilities from uploaded documents.</li>
+      <li>Built a decentralized application prototype using Solidity and Truffle, evaluating blockchain ledger immutability for task-state management.</li>
+      <li>Researched QA testing by developing automated test scripts in Katalon.</li>
+    </ul>
+
+    <div class="job-head">
+      <span class="job-title">Junior Technical Analyst (Co-op) — MTO</span>
+      <span class="job-dates">St. Catharines, ON · Jun 2020 – Aug 2020</span>
+    </div>
+    <ul>
+      <li>Optimized Azure cloud governance by analyzing, auditing, and restructuring tagging schemas across resource groups to map asset utilization.</li>
+      <li>Facilitated cross-functional meetings to present technical findings, securing stakeholder consensus to decommission redundant cloud resources.</li>
+      <li>Audited and eliminated unneeded infrastructure, reducing Azure subscription costs by 38% in the primary environment and 18% in the secondary.</li>
+    </ul>
+
+    <div class="job-head">
+      <span class="job-title">Research Assistant — Brock University</span>
+      <span class="job-dates">St. Catharines, ON · May 2020 – Jun 2020</span>
+    </div>
+    <ul>
+      <li>Conducted root-cause analysis on server bottlenecks, evaluating machine-learning methods to identify critical-path anomalies and pinpoint underperformance.</li>
+      <li>Independently studied predictive modeling and data-analysis techniques through academic literature, translating algorithms into diagnostic frameworks.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Academic Projects</h2>
+    <div class="project">
+      <span class="project-name">Capstone — CI/CD Microservice Deployment (Apr 2022)</span>
+      <span class="project-desc"> — Automated CI/CD pipelines with Docker and GitHub Actions to containerize and deploy microservices to Heroku, minimizing environment drift; built data-cleaning workflows turning unstructured campus/event data into standardized, AI-ready datasets; ran system-integration testing across git workflows for stable releases.</span>
+    </div>
+    <div class="project">
+      <span class="project-name">Document Reconstruction Engine — Genetic Algorithm (Mar 2020)</span>
+      <span class="project-desc"> — Designed a structural reconstruction system using genetic algorithms to solve shredded-document reordering; compared three crossover models (Order, PMX, Alternative Position) in Python (Pandas) and Java, with quantitative analysis synthesized into a technical whitepaper.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="edu"><strong>Brock University</strong> — Honours B.Sc. Computer Science, Minor in Economics, Jan 2019 – Jan 2023. Dean's Honour List (years 1, 2, and 3).</div>
+  </section>
+
+  <section>
+    <h2>Extracurricular &amp; Leadership</h2>
+    <ul>
+      <li><strong>Computer Science Club President (2020–2021)</strong> — led coordination between club executives and external stakeholders to plan, scope, and deploy hybrid workshops; managed end-to-end event lifecycles and scaled a recurring workshop framework delivering technical training to a diverse student body.</li>
+      <li><strong>International Collegiate Programming Contest (2021)</strong> — analyzed complex logic problems in a high-pressure team setting, designing optimized algorithmic solutions under strict runtime and data constraints.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Additional Experience</h2>
+    <ul>
+      <li><strong>Drop-in Tutor, Brock University (2022–2023)</strong> — translated complex CS concepts into accessible lessons for a diverse student body; designed and delivered a structured C++ curriculum covering foundational object-oriented programming and system logic.</li>
+      <li><strong>Crew / Team Lead, McDonald's (2019–2023)</strong> — led kitchen operations and cross-functional teams under high-pressure conditions; awarded Employee of the Year.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Volunteer Work</h2>
+    <ul>
+      <li><strong>Church Volunteer, St. Catharines (2019–present)</strong> — run graphics, lighting, and audio for weekly services; assist with setup and teardown of the sanctuary; lead a weekly young-adults scripture group.</li>
+      <li><strong>Canada Games 2022 Niagara (Aug 2022)</strong> — provided tech support resolving technical issues during events, and served as a food provisioner coordinating meals for volunteers.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Portfolio &amp; Links</h2>
+    <div class="edu">
+      <a href="https://joellijujacob.com">Personal Website</a>
+      <span class="sep">|</span><a href="https://github.com/Joel-Liju">GitHub</a>
+      <span class="sep">|</span><a href="https://www.linkedin.com/in/joel-liju-jacob">LinkedIn</a>
+      <span class="sep">|</span><a href="https://toplinemep.ae/">Topline</a>
+    </div>
+  </section>
+
+</div>
+<script>
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('theme');
+  const initialTheme = savedTheme ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  root.classList.toggle('dark', initialTheme === 'dark');
+
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const isDark = root.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
+</body>
+</html>

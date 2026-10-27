@@ -1,6 +1,6 @@
 ---
 title: Niagara College Golf
-summary: Website created for Niagara College, where clients can sign up for golf tournaments organized by Niagara College as a fund raiser.
+summary: This was my first project at Niagara College -> I rebuilt the golf tournament registration site and designed the database behind it.
 role: Software Developer
 date: 2023-10-12
 tags: [Azure DevOps, SQL Server, .Net, Blazor]

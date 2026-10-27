@@ -1,6 +1,6 @@
 ---
 title: South Marble
-summary: Website created to help with showcasing a catalog for the company's different available products of kitchen counter tops.
+summary: I designed this catalogue to make it easier for customers to browse countertop options and contact the owner about a project.
 role: Lead Software Engineer
 date: 2026-05-10
 tags: [UI Design, Astro, Business Solution, Cloudflare]

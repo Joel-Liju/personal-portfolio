@@ -1,6 +1,6 @@
 ---
 title: Topline
-summary: Software to help a HVAC company with outreach and have a web presence by creating a new website for that company using modern technology.
+summary: I built Topline’s website to help the team present its services and make it easier for potential clients to start a conversation.
 role: Lead Software Engineer
 date: 2026-07-13
 tags: [UI Design, Astro, Business Solution]
