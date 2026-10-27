@@ -1,0 +1,289 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { SITE } from '@/site.config';
+
+const skills = [
+  { label: 'Languages', value: 'Java, Python, C#, C++, JavaScript, SQL' },
+  { label: 'Frameworks', value: 'React, PyTest, Selenium, PyTorch, Pandas, NumPy' },
+  { label: 'Software & Tech', value: 'Docker, Azure Pipelines, GitHub Actions' },
+  { label: 'Platforms', value: 'Windows, Linux, Unix' },
+];
+
+const experience = [
+  {
+    title: 'Programmer Analyst — Niagara College (ESS)',
+    details: 'Welland, ON · Jul 2023 – Jun 2026',
+    bullets: [
+      'Developed, debugged, and maintained automated reporting scripts for 4 departments (ITS, Enrolment, Finance, HR), cutting a manual reporting cycle of nearly 2 weeks down to a few minutes.',
+      'Architected a standardized CI/CD pipeline for the test environment, replacing a manual email-based approval chain that took 30 minutes to 2 days with one-click approvals, cutting staging deployment times to under 15 minutes.',
+      'Collaborated across business and tech teams to gather requirements and define clear acceptance criteria, consistently closing 20% more tickets per sprint than the team average.',
+    ],
+  },
+  {
+    title: 'Junior Developer (Co-op) — Digital Garage, MTO',
+    details: 'St. Catharines, ON · May 2022 – Aug 2022',
+    bullets: [
+      'Delivered full-stack features for an internal web application using C#, React, and SQL in an Agile team; refactored repeated logic into shared functions and split overbloated functions into focused components to improve maintainability across the site.',
+      'Prototyped an automated Azure-based virus-scanning API for the data-ingestion pipeline, mitigating vulnerabilities from uploaded documents.',
+      'Built a decentralized application prototype using Solidity and Truffle, evaluating blockchain ledger immutability for task-state management.',
+      'Researched QA testing by developing automated test scripts in Katalon.',
+    ],
+  },
+  {
+    title: 'Junior Technical Analyst (Co-op) — MTO',
+    details: 'St. Catharines, ON · Jun 2020 – Aug 2020',
+    bullets: [
+      'Optimized Azure cloud governance by analyzing, auditing, and restructuring tagging schemas across resource groups to map asset utilization.',
+      'Facilitated cross-functional meetings to present technical findings, securing stakeholder consensus to decommission redundant cloud resources.',
+      'Audited and eliminated unneeded infrastructure, reducing Azure subscription costs by 38% in the primary environment and 18% in the secondary.',
+    ],
+  },
+  {
+    title: 'Research Assistant — Brock University',
+    details: 'St. Catharines, ON · May 2020 – Jun 2020',
+    bullets: [
+      'Conducted root-cause analysis on server bottlenecks, evaluating machine-learning methods to identify critical-path anomalies and pinpoint underperformance.',
+      'Independently studied predictive modeling and data-analysis techniques through academic literature, translating algorithms into diagnostic frameworks.',
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: 'Capstone — CI/CD Microservice Deployment (Apr 2022)',
+    description:
+      'Automated CI/CD pipelines with Docker and GitHub Actions to containerize and deploy microservices to Heroku, minimizing environment drift; built data-cleaning workflows turning unstructured campus/event data into standardized, AI-ready datasets; ran system-integration testing across git workflows for stable releases.',
+  },
+  {
+    title: 'Document Reconstruction Engine — Genetic Algorithm (Mar 2020)',
+    description:
+      'Designed a structural reconstruction system using genetic algorithms to solve shredded-document reordering; compared three crossover models (Order, PMX, Alternative Position) in Python (Pandas) and Java, with quantitative analysis synthesized into a technical whitepaper.',
+  },
+];
+
+const leadership = [
+  {
+    title: 'Computer Science Club President (2020–2021)',
+    description:
+      'led coordination between club executives and external stakeholders to plan, scope, and deploy hybrid workshops; managed end-to-end event lifecycles and scaled a recurring workshop framework delivering technical training to a diverse student body.',
+  },
+  {
+    title: 'International Collegiate Programming Contest (2021)',
+    description:
+      'analyzed complex logic problems in a high-pressure team setting, designing optimized algorithmic solutions under strict runtime and data constraints.',
+  },
+];
+
+const additionalExperience = [
+  {
+    title: 'Drop-in Tutor, Brock University (2022–2023)',
+    description:
+      'translated complex CS concepts into accessible lessons for a diverse student body; designed and delivered a structured C++ curriculum covering foundational object-oriented programming and system logic.',
+  },
+  {
+    title: "Crew / Team Lead, McDonald's (2019–2023)",
+    description:
+      'led kitchen operations and cross-functional teams under high-pressure conditions; awarded Employee of the Year.',
+  },
+];
+
+const volunteerWork = [
+  {
+    title: 'Church Volunteer, St. Catharines (2019–present)',
+    description:
+      'run graphics, lighting, and audio for weekly services; assist with setup and teardown of the sanctuary; lead a weekly young-adults scripture group.',
+  },
+  {
+    title: 'Canada Games 2022 Niagara (Aug 2022)',
+    description:
+      'provided tech support resolving technical issues during events, and served as a food provisioner coordinating meals for volunteers.',
+  },
+];
+
+const externalLinks = [
+  { label: 'Personal Website', href: 'https://joellijujacob.com' },
+  { label: 'GitHub', href: 'https://github.com/Joel-Liju' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joel-liju-jacob' },
+  { label: 'Topline', href: 'https://toplinemep.ae/' },
+];
+---
+
+<BaseLayout
+  title="Resume"
+  description={`Resume for ${SITE.name}, Software Engineer.`}
+>
+  <article class="resume-page mx-auto max-w-5xl px-6 pt-12 pb-24 sm:pt-20">
+    <div class="mb-6">
+      <a
+        href="/"
+        class="border-line text-ink hover:border-signal hover:text-signal inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+        onclick="if (history.length > 1) { event.preventDefault(); history.back(); }"
+      ><span aria-hidden="true">←</span> Back</a>
+    </div>
+    <header class="resume-intro border-line bg-surface rounded-3xl border p-6 shadow-sm sm:p-10">
+      <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="text-signal mb-4 font-mono text-xs tracking-[0.2em] uppercase">Resume</p>
+          <h1 class="font-display text-ink text-4xl font-medium sm:text-6xl">Joel Jacob</h1>
+          <p class="text-signal mt-2 font-display text-xl sm:text-2xl">Software Engineer</p>
+          <p class="text-ink-soft mt-6 max-w-2xl leading-relaxed">
+            Software Engineer with 3 years building backend and full-stack systems in C#/.NET and
+            Java, plus React and Python. Built CI/CD pipelines that cut staging deploys to under 15
+            minutes and automated reporting used across academic departments. Looking for backend or
+            full-stack roles where I can ship and automate.
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-wrap gap-3">
+          <Button href="/resume.pdf">Download PDF <span aria-hidden="true">↓</span></Button>
+        </div>
+      </div>
+
+      <div class="border-line text-ink-soft mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t pt-5 font-mono text-xs">
+        <span>St. Catharines, ON</span>
+        <a class="hover:text-signal transition-colors" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a class="hover:text-signal transition-colors" href="tel:+14164759865">(416) 475-9865</a>
+        <a class="hover:text-signal transition-colors" href={SITE.social[0].href}>GitHub</a>
+        <a class="hover:text-signal transition-colors" href={SITE.social[1].href}>LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Skills" />
+      <div class="resume-skills grid gap-3 sm:grid-cols-2">
+        {skills.map((skill) => (
+          <div class="resume-skill border-line bg-surface rounded-2xl border p-5">
+            <h3 class="text-ink font-display text-base font-medium">{skill.label}</h3>
+            <p class="text-ink-soft mt-2 text-sm leading-relaxed">{skill.value}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Experience" />
+      <div class="space-y-4">
+        {experience.map((job) => (
+          <article class:list={["resume-role border-line bg-surface rounded-2xl border p-5 sm:p-7", { "resume-role-featured": experience.indexOf(job) === 0 }]}>
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+              <h3 class="font-display text-ink text-lg font-medium sm:text-xl">{job.title}</h3>
+              <p class="resume-date text-ink-soft shrink-0 font-mono text-xs">{job.details}</p>
+            </div>
+            <ul class="text-ink-soft mt-4 space-y-2 text-sm leading-relaxed">
+              {job.bullets.map((bullet) => <li class="flex gap-3"><span class="text-signal">•</span><span>{bullet}</span></li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Academic Projects" />
+      <div class="grid gap-4 md:grid-cols-2">
+        {projects.map((project) => (
+          <article class="border-line bg-surface rounded-2xl border p-5 sm:p-7">
+            <h3 class="font-display text-ink text-lg font-medium">{project.title}</h3>
+            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{project.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Education" />
+      <div class="resume-education border-line bg-surface rounded-2xl border p-5 sm:p-7">
+        <h3 class="font-display text-ink text-lg font-medium">Brock University</h3>
+        <p class="text-ink-soft mt-2 text-sm leading-relaxed">
+          Honours B.Sc. Computer Science, Minor in Economics, Jan 2019 – Jan 2023. Dean's Honour
+          List (years 1, 2, and 3).
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Extracurricular & Leadership" />
+      <div class="grid gap-4 md:grid-cols-2">
+        {leadership.map((item) => (
+          <article class="border-line bg-surface rounded-2xl border p-5 sm:p-7">
+            <h3 class="font-display text-ink text-lg font-medium">{item.title}</h3>
+            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Additional Experience" />
+      <div class="grid gap-4 md:grid-cols-2">
+        {additionalExperience.map((item) => (
+          <article class="border-line bg-surface rounded-2xl border p-5 sm:p-7">
+            <h3 class="font-display text-ink text-lg font-medium">{item.title}</h3>
+            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Volunteer Work" />
+      <div class="grid gap-4 md:grid-cols-2">
+        {volunteerWork.map((item) => (
+          <article class="border-line bg-surface rounded-2xl border p-5 sm:p-7">
+            <h3 class="font-display text-ink text-lg font-medium">{item.title}</h3>
+            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <SectionHeading eyebrow="Portfolio & Links" />
+      <div class="border-line bg-surface flex flex-wrap gap-x-6 gap-y-3 rounded-2xl border p-5 sm:p-7">
+        {externalLinks.map((link) => (
+          <a class="text-signal hover:text-ink inline-flex items-center gap-1 font-mono text-sm transition-colors" href={link.href}>
+            {link.label}<span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .resume-intro {
+    background-image: linear-gradient(135deg, color-mix(in srgb, var(--color-signal) 7%, var(--color-surface)), var(--color-surface) 58%);
+  }
+
+  .resume-skill {
+    border-top: 2px solid color-mix(in srgb, var(--color-signal) 36%, var(--color-line));
+  }
+
+  .resume-role {
+    position: relative;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .resume-role:hover {
+    border-color: color-mix(in srgb, var(--color-signal) 48%, var(--color-line));
+  }
+
+  .resume-role-featured {
+    border-left: 3px solid var(--color-signal);
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--color-signal) 9%, transparent);
+  }
+
+  .resume-date {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-signal) 9%, var(--color-surface));
+    padding: 0.4rem 0.65rem;
+  }
+
+  .resume-education {
+    background: color-mix(in srgb, var(--color-signal) 4%, var(--color-surface));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .resume-role { transition: none; }
+  }
+</style>

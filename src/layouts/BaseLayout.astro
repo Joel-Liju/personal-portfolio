@@ -25,12 +25,44 @@ const { title, description = SITE.description, image = '/og-image.png' } = Astro
       <slot />
     </main>
     <Footer />
+    <button
+      id="back-to-top"
+      type="button"
+      aria-label="Scroll to top"
+      aria-hidden="true"
+      tabindex="-1"
+      class="fixed right-6 bottom-6 z-50 inline-flex size-12 translate-y-2 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-lg opacity-0 pointer-events-none transition-all duration-200 hover:border-signal hover:text-signal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal motion-reduce:transition-none"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="size-5">
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </button>
   </body>
 </html>
 
 <script>
   let pageRevealObserver: IntersectionObserver | undefined;
   let revealFrame = 0;
+
+  function updateBackToTop() {
+    const button = document.querySelector<HTMLButtonElement>('#back-to-top');
+    if (!button) return;
+    const visible = window.scrollY > 160;
+    button.classList.toggle('translate-y-2', !visible);
+    button.classList.toggle('opacity-0', !visible);
+    button.classList.toggle('pointer-events-none', !visible);
+    button.classList.toggle('translate-y-0', visible);
+    button.classList.toggle('opacity-100', visible);
+    button.classList.toggle('pointer-events-auto', visible);
+    button.setAttribute('aria-hidden', String(!visible));
+    button.tabIndex = visible ? 0 : -1;
+  }
+
+  document.querySelector<HTMLButtonElement>('#back-to-top')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  });
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+  updateBackToTop();
 
   function collectRevealUnits(element: HTMLElement, depth = 0): HTMLElement[] {
     const children = Array.from(element.children).filter(
