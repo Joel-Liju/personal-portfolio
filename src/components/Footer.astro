@@ -5,12 +5,12 @@ import { ArrowUpRight, BriefcaseBusiness, CodeXml, Mail, MessageCircle } from '@
 const year = new Date().getFullYear();
 const whatsappMessage = `Hi ${SITE.name}, I came across your portfolio and would love to get in touch.`;
 const footerLinks = [
-  { label: 'GitHub', href: SITE.social[0].href, Icon: CodeXml, external: true },
-  { label: 'LinkedIn', href: SITE.social[1].href, Icon: BriefcaseBusiness, external: true },
+  { label: 'GitHub', href: SITE.social[1].href, Icon: CodeXml, external: true },
+  { label: 'LinkedIn', href: SITE.social[2].href, Icon: BriefcaseBusiness, external: true },
   { label: 'Email', href: `mailto:${SITE.email}`, Icon: Mail, external: false },
   {
     label: 'WhatsApp',
-    href: `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`,
+    href: SITE.social[0].href,
     Icon: MessageCircle,
     external: true,
   },
