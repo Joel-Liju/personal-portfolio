@@ -126,7 +126,7 @@ const externalLinks = [
       <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
         <div class="max-w-2xl">
           <p class="text-signal mb-4 font-mono text-xs tracking-[0.2em] uppercase">Resume</p>
-          <h1 class="font-display text-ink text-4xl font-medium sm:text-6xl">Joel Jacob</h1>
+          <h1 class="font-display text-ink text-4xl font-medium sm:text-6xl">{SITE.name}</h1>
           <p class="text-signal mt-2 font-display text-xl sm:text-2xl">Software Engineer</p>
           <p class="text-ink-soft mt-6 max-w-2xl leading-relaxed">
             Software Engineer with 3 years building backend and full-stack systems in C#/.NET and
@@ -142,7 +142,7 @@ const externalLinks = [
 
       <div class="border-line text-ink-soft mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t pt-5 font-mono text-xs">
         <span>Kottayam, Kerala</span>
-        <a class="hover:text-signal transition-colors" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a class="hover:text-signal transition-colors" href={`mailto:${SITE.email}`}><!--email_off-->{SITE.email}<!--/email_off--></a>
         <a class="hover:text-signal transition-colors" href="tel:+919544759865">+91 95447 59865</a>
         <a class="hover:text-signal transition-colors" href={SITE.social[0].href}>GitHub</a>
         <a class="hover:text-signal transition-colors" href={SITE.social[1].href}>LinkedIn</a>
