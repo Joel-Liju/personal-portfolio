@@ -6,16 +6,24 @@ import { SITE } from '@/site.config';
 
 const skills = [
   { label: 'Languages', value: 'Java, Python, C#, C++, JavaScript, SQL' },
-  { label: 'Frameworks', value: 'React, PyTest, Selenium, PyTorch, Pandas, NumPy' },
-  { label: 'Software & Tech', value: 'Docker, Azure Pipelines, GitHub Actions' },
-  { label: 'Platforms', value: 'Windows, Linux, Unix' },
+  { label: 'Database', value: 'SQL Server, SQL, MongoDB' },
+  { label: 'Cloud & DevOps', value: 'Azure, Azure DevOps, Docker, GitHub Actions, CI/CD, Git' },
 ];
 
 const experience = [
   {
+    title: 'Independent Developer',
+    details: 'Jul 2026 – Present (relocated to India)',
+    bullets: [
+      'Designed and built the English/Arabic website for Topline, a UAE HVAC contractor, using Astro (toplinemep.ae).',
+      'Built and maintain my portfolio site with project case studies (joellijujacob.com).',
+    ],
+  },
+  {
     title: 'Programmer Analyst — Niagara College (ESS)',
     details: 'Welland, ON · Jul 2023 – Jun 2026',
     bullets: [
+      'Built the Niagara Career Fair registration system in C#, Blazor (.NET 10) and SQL Server, with an organizer dashboard tracking registrations, attendance, food requests and fundraising.',
       'Developed, debugged, and maintained automated reporting scripts for 4 departments (ITS, Enrolment, Finance, HR), cutting a manual reporting cycle of nearly 2 weeks down to a few minutes.',
       'Architected a standardized CI/CD pipeline for the test environment, replacing a manual email-based approval chain that took 30 minutes to 2 days with one-click approvals, cutting staging deployment times to under 15 minutes.',
       'Collaborated across business and tech teams to gather requirements and define clear acceptance criteria, consistently closing 20% more tickets per sprint than the team average.',
@@ -38,14 +46,6 @@ const experience = [
       'Optimized Azure cloud governance by analyzing, auditing, and restructuring tagging schemas across resource groups to map asset utilization.',
       'Facilitated cross-functional meetings to present technical findings, securing stakeholder consensus to decommission redundant cloud resources.',
       'Audited and eliminated unneeded infrastructure, reducing Azure subscription costs by 38% in the primary environment and 18% in the secondary.',
-    ],
-  },
-  {
-    title: 'Research Assistant — Brock University',
-    details: 'St. Catharines, ON · May 2020 – Jun 2020',
-    bullets: [
-      'Conducted root-cause analysis on server bottlenecks, evaluating machine-learning methods to identify critical-path anomalies and pinpoint underperformance.',
-      'Independently studied predictive modeling and data-analysis techniques through academic literature, translating algorithms into diagnostic frameworks.',
     ],
   },
 ];
@@ -91,7 +91,7 @@ const additionalExperience = [
 
 const volunteerWork = [
   {
-    title: 'Church Volunteer, St. Catharines (2019–present)',
+    title: 'Church Volunteer, St. Catharines (2019–2026)',
     description:
       'run graphics, lighting, and audio for weekly services; assist with setup and teardown of the sanctuary; lead a weekly young-adults scripture group.',
   },
@@ -129,10 +129,10 @@ const externalLinks = [
           <h1 class="font-display text-ink text-4xl font-medium sm:text-6xl">{SITE.name}</h1>
           <p class="text-signal mt-2 font-display text-xl sm:text-2xl">Software Engineer</p>
           <p class="text-ink-soft mt-6 max-w-2xl leading-relaxed">
-            Software Engineer with 3 years building backend and full-stack systems in C#/.NET and
-            Java, plus React and Python. Built CI/CD pipelines that cut staging deploys to under 15
-            minutes and automated reporting used across academic departments. Looking for backend or
-            full-stack roles where I can ship and automate.
+            Software Engineer with 3 years of experience building backend and full-stack systems,
+            including C#/.NET applications on ASP.NET Core (Blazor) with SQL Server. Cut staging
+            deployment time to under 15 minutes with a standardized CI/CD pipeline and automated
+            reporting for 4 departments. Immediate joiner, open to relocation across India.
           </p>
         </div>
         <div class="flex shrink-0 flex-wrap gap-3">
@@ -144,8 +144,8 @@ const externalLinks = [
         <span>Kottayam, Kerala</span>
         <a class="hover:text-signal transition-colors" href={`mailto:${SITE.email}`}><!--email_off-->{SITE.email}<!--/email_off--></a>
         <a class="hover:text-signal transition-colors" href="tel:+919544759865">+91 95447 59865</a>
-        <a class="hover:text-signal transition-colors" href={SITE.social[0].href}>GitHub</a>
-        <a class="hover:text-signal transition-colors" href={SITE.social[1].href}>LinkedIn</a>
+        <a class="hover:text-signal transition-colors" href={SITE.social[1].href}>GitHub</a>
+        <a class="hover:text-signal transition-colors" href={SITE.social[2].href}>LinkedIn</a>
       </div>
     </header>
 
