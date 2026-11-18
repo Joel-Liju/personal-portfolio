@@ -2,13 +2,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
+import Skills from '@/components/Skills.astro';
 import { SITE } from '@/site.config';
-
-const skills = [
-  { label: 'Languages', value: 'Java, Python, C#, C++, JavaScript, SQL' },
-  { label: 'Database', value: 'SQL Server, SQL, MongoDB' },
-  { label: 'Cloud & DevOps', value: 'Azure, Azure DevOps, Docker, GitHub Actions, CI/CD, Git' },
-];
 
 const experience = [
   {
@@ -149,17 +144,7 @@ const externalLinks = [
       </div>
     </header>
 
-    <section class="mt-14">
-      <SectionHeading eyebrow="Skills" />
-      <div class="resume-skills grid gap-3 sm:grid-cols-2">
-        {skills.map((skill) => (
-          <div class="resume-skill border-line bg-surface rounded-2xl border p-5">
-            <h3 class="text-ink font-display text-base font-medium">{skill.label}</h3>
-            <p class="text-ink-soft mt-2 text-sm leading-relaxed">{skill.value}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+    <Skills />
 
     <section class="mt-14">
       <SectionHeading eyebrow="Experience" />
@@ -253,10 +238,6 @@ const externalLinks = [
 <style>
   .resume-intro {
     background-image: linear-gradient(135deg, color-mix(in srgb, var(--color-signal) 7%, var(--color-surface)), var(--color-surface) 58%);
-  }
-
-  .resume-skill {
-    border-top: 2px solid color-mix(in srgb, var(--color-signal) 36%, var(--color-line));
   }
 
   .resume-role {

@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
+import Skills from '@/components/Skills.astro';
 import { SITE } from '@/site.config';
-
-const tools = ['C#', '.NET', 'Java', 'Python', 'JavaScript', 'React', 'SQL', 'Docker'];
 ---
 
 <BaseLayout title="About" description={`A bit about ${SITE.name} and how they work.`}>
@@ -54,22 +53,11 @@ const tools = ['C#', '.NET', 'Java', 'Python', 'JavaScript', 'React', 'SQL', 'Do
       />
     </div>
 
-    <div class="mt-10">
-      <p class="text-ink-soft mb-3 font-mono text-xs tracking-[0.2em] uppercase">Tools</p>
-      <ul class="flex flex-wrap gap-2">
-        {
-          tools.map((tool) => (
-            <li class="border-line text-ink-soft rounded-full border px-3 py-1 font-mono text-xs">
-              {tool}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <Skills class="mt-10" />
 
     <div class="mt-10 flex flex-wrap gap-3">
       <Button href="/contact">Get in touch</Button>
-      <Button href="/resume" variant="ghost">Resume</Button>
+      <Button href="/hobbies" variant="ghost">Side quests &amp; snacks</Button>
     </div>
   </section>
 </BaseLayout>

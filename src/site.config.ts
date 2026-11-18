@@ -16,8 +16,8 @@ export const SITE = {
 } as const;
 
 export const NAV_LINKS = [
+  { label: 'Resume', href: '/resume' },
   { label: 'Work', href: '/work' },
-  { label: 'Hobbies', href: '/hobbies' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ] as const;
