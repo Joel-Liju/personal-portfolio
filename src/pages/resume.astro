@@ -97,12 +97,39 @@ const volunteerWork = [
   },
 ];
 
+type Credential = {
+  title: string;
+  issuer: string;
+  kind: 'Badge' | 'Certificate';
+  issued?: string;
+  verificationUrl?: string;
+  pdfUrl?: string;
+};
+
+const credentials: Credential[] = [
+  {
+    title: 'Claude 101',
+    issuer: 'Claude Academy',
+    kind: 'Badge',
+    issued: 'Nov 13, 2026',
+    verificationUrl: 'https://academy.claude.com/verify/06c1a1efc750851ff1a1b7a0582ff00a',
+  },
+  {
+    title: 'Claude Platform 101',
+    issuer: 'Claude Academy',
+    kind: 'Badge',
+    issued: 'Nov 15, 2026',
+    verificationUrl: 'https://academy.claude.com/verify/e89de691728c466c4d51dc0da793657b',
+  },
+];
+
 const resumeSections = [
   { id: 'resume-overview', label: 'Overview' },
   { id: 'resume-skills', label: 'Tool Belt' },
   { id: 'resume-experience', label: 'Experience' },
   { id: 'resume-projects', label: 'Projects' },
   { id: 'resume-education', label: 'Education' },
+  { id: 'resume-credentials', label: 'Certificates & Badges' },
   { id: 'resume-leadership', label: 'Leadership' },
   { id: 'resume-additional', label: 'Additional' },
   { id: 'resume-volunteer', label: 'Volunteer' }
@@ -226,6 +253,69 @@ const resumeSections = [
           Honours B.Sc. Computer Science, Minor in Economics, Jan 2019 – Jan 2023. Dean's Honour
           List (years 1, 2, and 3).
         </p>
+      </div>
+    </section>
+
+    <section id="resume-credentials" tabindex="-1" class="mt-14">
+      <SectionHeading eyebrow="Certificates & Badges" count={credentials.length} />
+      <div class="grid gap-4 md:grid-cols-2">
+        {credentials.map((credential) => (
+          <article class="resume-credential border-line bg-surface rounded-2xl border p-5 sm:p-6">
+            <div class="flex items-start gap-4">
+              <span class="resume-credential-mark grid size-12 shrink-0 place-items-center rounded-xl">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-6"
+                >
+                  <path d="M8 3.75h8l1.25 4.5-5.25 3.5-5.25-3.5L8 3.75Z" />
+                  <path d="m8.6 10.1-1 9.15 4.4-2.5 4.4 2.5-1-9.15M10 6.75h4" />
+                </svg>
+              </span>
+              <div class="min-w-0 flex-1">
+                <p class="text-signal font-mono text-[0.625rem] tracking-[0.16em] uppercase">
+                  {credential.kind}
+                </p>
+                <h3 class="font-display text-ink mt-1 text-lg font-medium">
+                  {credential.title}
+                </h3>
+                <p class="text-ink-soft mt-1 text-sm">
+                  {credential.issuer}
+                  {credential.issued && <> · {credential.issued}</>}
+                </p>
+              </div>
+            </div>
+            {(credential.verificationUrl || credential.pdfUrl) && (
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
+                {credential.verificationUrl && (
+                  <a
+                    class="border-line text-ink-soft hover:border-signal hover:text-signal inline-flex items-center gap-2 rounded-full border px-3 py-2 font-mono text-[0.625rem] tracking-wide uppercase transition-colors"
+                    href={credential.verificationUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Verify badge <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+                {credential.pdfUrl && (
+                  <a
+                    class="border-line text-ink-soft hover:border-signal hover:text-signal inline-flex items-center gap-2 rounded-full border px-3 py-2 font-mono text-[0.625rem] tracking-wide uppercase transition-colors"
+                    href={credential.pdfUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View PDF <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            )}
+          </article>
+        ))}
       </div>
     </section>
 
@@ -354,6 +444,21 @@ const resumeSections = [
 
   .resume-education {
     background: color-mix(in srgb, var(--color-signal) 4%, var(--color-surface));
+  }
+
+  .resume-credential {
+    border-top: 2px solid color-mix(in srgb, var(--color-signal) 42%, var(--color-line));
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .resume-credential:hover {
+    border-color: color-mix(in srgb, var(--color-signal) 58%, var(--color-line));
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--color-signal) 8%, transparent);
+  }
+
+  .resume-credential-mark {
+    background: color-mix(in srgb, var(--color-signal) 10%, var(--color-surface));
+    color: var(--color-signal);
   }
 
   :global(html:has(.resume-page)) {
