@@ -97,11 +97,15 @@ const volunteerWork = [
   },
 ];
 
-const externalLinks = [
-  { label: 'Personal Website', href: 'https://joellijujacob.com' },
-  { label: 'GitHub', href: 'https://github.com/Joel-Liju' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joel-liju-jacob' },
-  { label: 'Topline', href: 'https://toplinemep.ae/' },
+const resumeSections = [
+  { id: 'resume-overview', label: 'Overview' },
+  { id: 'resume-skills', label: 'Tool Belt' },
+  { id: 'resume-experience', label: 'Experience' },
+  { id: 'resume-projects', label: 'Projects' },
+  { id: 'resume-education', label: 'Education' },
+  { id: 'resume-leadership', label: 'Leadership' },
+  { id: 'resume-additional', label: 'Additional' },
+  { id: 'resume-volunteer', label: 'Volunteer' }
 ];
 ---
 
@@ -110,14 +114,7 @@ const externalLinks = [
   description={`Resume for ${SITE.name}, Software Engineer.`}
 >
   <article class="resume-page mx-auto max-w-5xl px-6 pt-12 pb-24 sm:pt-20">
-    <div class="mb-6">
-      <a
-        href="/"
-        class="border-line text-ink hover:border-signal hover:text-signal inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-        onclick="if (history.length > 1) { event.preventDefault(); history.back(); }"
-      ><span aria-hidden="true">←</span> Back</a>
-    </div>
-    <header class="resume-intro border-line bg-surface rounded-3xl border p-6 shadow-sm sm:p-10">
+    <header id="resume-overview" tabindex="-1" class="resume-intro border-line bg-surface rounded-3xl border p-6 shadow-sm sm:p-10">
       <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
         <div class="max-w-2xl">
           <p class="text-signal mb-4 font-mono text-xs tracking-[0.2em] uppercase">Resume</p>
@@ -144,9 +141,55 @@ const externalLinks = [
       </div>
     </header>
 
-    <Skills />
+    <nav class="resume-section-rail" aria-label="Resume sections">
+      <p class="resume-section-label">On this page</p>
+      <ol>
+        {
+          resumeSections.map((section) => (
+            <li>
+              <a
+                href={`#${section.id}`}
+                data-section-link={section.id}
+                data-section-label={section.label}
+              >
+                {section.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
 
-    <section class="mt-14">
+    <details class="resume-section-menu">
+      <summary>
+        <span>Jump to</span>
+        <span data-current-section>Overview</span>
+        <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
+          <path d="m4 6 4 4 4-4"></path>
+        </svg>
+      </summary>
+      <nav aria-label="Resume sections">
+        <ol>
+          {
+            resumeSections.map((section) => (
+              <li>
+                <a
+                  href={`#${section.id}`}
+                  data-section-link={section.id}
+                  data-section-label={section.label}
+                >
+                  {section.label}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+    </details>
+
+    <Skills id="resume-skills" />
+
+    <section id="resume-experience" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Experience" />
       <div class="space-y-4">
         {experience.map((job) => (
@@ -163,7 +206,7 @@ const externalLinks = [
       </div>
     </section>
 
-    <section class="mt-14">
+    <section id="resume-projects" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Academic Projects" />
       <div class="grid gap-4 md:grid-cols-2">
         {projects.map((project) => (
@@ -175,7 +218,7 @@ const externalLinks = [
       </div>
     </section>
 
-    <section class="mt-14">
+    <section id="resume-education" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Education" />
       <div class="resume-education border-line bg-surface rounded-2xl border p-5 sm:p-7">
         <h3 class="font-display text-ink text-lg font-medium">Brock University</h3>
@@ -186,7 +229,7 @@ const externalLinks = [
       </div>
     </section>
 
-    <section class="mt-14">
+    <section id="resume-leadership" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Extracurricular & Leadership" />
       <div class="grid gap-4 md:grid-cols-2">
         {leadership.map((item) => (
@@ -198,7 +241,7 @@ const externalLinks = [
       </div>
     </section>
 
-    <section class="mt-14">
+    <section id="resume-additional" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Additional Experience" />
       <div class="grid gap-4 md:grid-cols-2">
         {additionalExperience.map((item) => (
@@ -210,7 +253,7 @@ const externalLinks = [
       </div>
     </section>
 
-    <section class="mt-14">
+    <section id="resume-volunteer" tabindex="-1" class="mt-14">
       <SectionHeading eyebrow="Volunteer Work" />
       <div class="grid gap-4 md:grid-cols-2">
         {volunteerWork.map((item) => (
@@ -221,23 +264,72 @@ const externalLinks = [
         ))}
       </div>
     </section>
-
-    <section class="mt-14">
-      <SectionHeading eyebrow="Portfolio & Links" />
-      <div class="border-line bg-surface flex flex-wrap gap-x-6 gap-y-3 rounded-2xl border p-5 sm:p-7">
-        {externalLinks.map((link) => (
-          <a class="text-signal hover:text-ink inline-flex items-center gap-1 font-mono text-sm transition-colors" href={link.href}>
-            {link.label}<span aria-hidden="true">↗</span>
-          </a>
-        ))}
-      </div>
-    </section>
   </article>
 </BaseLayout>
 
 <style>
   .resume-intro {
     background-image: linear-gradient(135deg, color-mix(in srgb, var(--color-signal) 7%, var(--color-surface)), var(--color-surface) 58%);
+  }
+
+  .resume-section-rail {
+    position: fixed;
+    z-index: 20;
+    top: 50%;
+    left: max(1rem, calc((100vw - 64rem) / 2 - 8.5rem));
+    width: 7.25rem;
+    transform: translateY(-50%);
+  }
+
+  .resume-section-label {
+    margin-bottom: 0.75rem;
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .resume-section-rail ol {
+    border-left: 1px solid var(--color-line);
+  }
+
+  .resume-section-rail a {
+    position: relative;
+    display: block;
+    padding: 0.4rem 0 0.4rem 0.75rem;
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    line-height: 1.35;
+    transition: color 180ms ease;
+  }
+
+  .resume-section-rail a::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1px;
+    width: 2px;
+    background: transparent;
+    content: '';
+  }
+
+  .resume-section-rail a:hover,
+  .resume-section-rail a[aria-current='location'] {
+    color: var(--color-signal);
+  }
+
+  .resume-section-rail a[aria-current='location']::before {
+    background: var(--color-signal);
+  }
+
+  .resume-section-menu {
+    display: none;
+  }
+
+  .resume-page [id^='resume-'] {
+    scroll-margin-top: 7rem;
   }
 
   .resume-role {
@@ -264,7 +356,240 @@ const externalLinks = [
     background: color-mix(in srgb, var(--color-signal) 4%, var(--color-surface));
   }
 
+  :global(html:has(.resume-page)) {
+    scrollbar-color: color-mix(in srgb, var(--color-signal) 62%, var(--color-line))
+      var(--color-paper);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+  }
+
+  :global(html:has(.resume-page)::-webkit-scrollbar) {
+    width: 0.75rem;
+  }
+
+  :global(html:has(.resume-page)::-webkit-scrollbar-track) {
+    background: var(--color-paper);
+  }
+
+  :global(html:has(.resume-page)::-webkit-scrollbar-thumb) {
+    border: 3px solid var(--color-paper);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-signal) 42%, var(--color-line));
+  }
+
+  :global(html:has(.resume-page)::-webkit-scrollbar-thumb:hover) {
+    background: var(--color-signal);
+  }
+
+  @media (min-width: 80rem) {
+    .resume-section-menu {
+      display: none;
+    }
+  }
+
+  @media (max-width: 79.999rem) {
+    .resume-section-rail {
+      display: none;
+    }
+
+    .resume-section-menu {
+      display: block;
+      position: sticky;
+      z-index: 30;
+      top: 5rem;
+      margin: 1rem 0 0.75rem;
+      border: 1px solid color-mix(in srgb, var(--color-signal) 42%, var(--color-line));
+      border-left: 3px solid var(--color-signal);
+      border-radius: 0.875rem;
+      background: color-mix(in srgb, var(--color-surface) 90%, var(--color-signal));
+      box-shadow: 0 10px 26px color-mix(in srgb, var(--color-ink) 12%, transparent);
+      backdrop-filter: blur(12px);
+    }
+
+    .resume-section-menu summary {
+      display: flex;
+      min-height: 2.75rem;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.9rem;
+      color: var(--color-ink-soft);
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      list-style: none;
+      text-transform: uppercase;
+    }
+
+    .resume-section-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .resume-section-menu summary span:first-child {
+      border-radius: 0.35rem;
+      background: color-mix(in srgb, var(--color-signal) 12%, var(--color-surface));
+      padding: 0.25rem 0.4rem;
+      color: var(--color-signal);
+    }
+
+    .resume-section-menu summary span:nth-child(2) {
+      color: var(--color-signal);
+      font-weight: 600;
+    }
+
+    .resume-section-menu summary svg {
+      width: 1rem;
+      height: 1rem;
+      margin-left: auto;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+      transition: transform 180ms ease;
+    }
+
+    .resume-section-menu[open] summary svg {
+      transform: rotate(180deg);
+    }
+
+    .resume-section-menu nav {
+      border-top: 1px solid var(--color-line);
+      padding: 0.5rem;
+    }
+
+    .resume-section-menu ol {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.25rem;
+    }
+
+    .resume-section-menu a {
+      display: block;
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.7rem;
+      color: var(--color-ink-soft);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      transition:
+        background-color 180ms ease,
+        color 180ms ease;
+    }
+
+    .resume-section-menu a:hover,
+    .resume-section-menu a[aria-current='location'] {
+      background: color-mix(in srgb, var(--color-signal) 10%, var(--color-surface));
+      color: var(--color-signal);
+    }
+
+    .resume-page [id^='resume-'] {
+      scroll-margin-top: 8rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .resume-role { transition: none; }
+    :global(html:has(.resume-page)) {
+      scroll-behavior: auto;
+    }
+
+    .resume-role,
+    .resume-section-menu summary svg {
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  let activeSectionFrame = 0;
+  let cleanupResumeSidebar = () => {};
+
+  function initResumeSidebar() {
+    cleanupResumeSidebar();
+
+    const sectionLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('.resume-page [data-section-link]'),
+    );
+    const sections = Array.from(
+      new Set(
+        sectionLinks
+          .map((link) => document.getElementById(link.dataset.sectionLink ?? ''))
+          .filter((section): section is HTMLElement => section instanceof HTMLElement),
+      ),
+    );
+    const currentSectionLabels = document.querySelectorAll<HTMLElement>(
+      '[data-current-section]',
+    );
+    const mobileSectionMenu = document.querySelector<HTMLDetailsElement>(
+      '.resume-section-menu',
+    );
+
+    if (!sectionLinks.length || !sections.length) return;
+
+    function updateActiveSection() {
+      if (activeSectionFrame) return;
+
+      activeSectionFrame = window.requestAnimationFrame(() => {
+        const marker = window.innerHeight * 0.32;
+        let activeSection = sections[0];
+
+        sections.forEach((section) => {
+          if (section.getBoundingClientRect().top <= marker) activeSection = section;
+        });
+
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+          activeSection = sections[sections.length - 1];
+        }
+
+        if (activeSection) {
+          sectionLinks.forEach((link) => {
+            if (link.dataset.sectionLink === activeSection?.id) {
+              link.setAttribute('aria-current', 'location');
+            } else {
+              link.removeAttribute('aria-current');
+            }
+          });
+
+          const label = sectionLinks.find(
+            (link) => link.dataset.sectionLink === activeSection?.id,
+          )?.dataset.sectionLabel;
+          if (label) currentSectionLabels.forEach((element) => (element.textContent = label));
+        }
+
+        activeSectionFrame = 0;
+      });
+    }
+
+    const mobileSectionLinks = Array.from(
+      mobileSectionMenu?.querySelectorAll<HTMLAnchorElement>('a') ?? [],
+    );
+    const closeMobileMenu = () => {
+      if (mobileSectionMenu) mobileSectionMenu.open = false;
+    };
+
+    mobileSectionLinks.forEach((link) => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+
+    cleanupResumeSidebar = () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+      mobileSectionLinks.forEach((link) => {
+        link.removeEventListener('click', closeMobileMenu);
+      });
+      if (activeSectionFrame) window.cancelAnimationFrame(activeSectionFrame);
+      activeSectionFrame = 0;
+      cleanupResumeSidebar = () => {};
+    };
+
+    updateActiveSection();
+  }
+
+  function cleanupBeforeSwap() {
+    cleanupResumeSidebar();
+  }
+
+  initResumeSidebar();
+  document.addEventListener('astro:page-load', initResumeSidebar);
+  document.addEventListener('astro:before-swap', cleanupBeforeSwap);
+</script>

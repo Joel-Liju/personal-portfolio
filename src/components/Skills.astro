@@ -56,9 +56,10 @@ import xamarinLogo from 'devicon/icons/xamarin/xamarin-original.svg';
 
 interface Props {
   class?: string;
+  id?: string;
 }
 
-const { class: className = 'mt-14' } = Astro.props;
+const { class: className = 'mt-14', id } = Astro.props;
 
 const skills = [
   {
@@ -162,7 +163,7 @@ const skills = [
 ];
 ---
 
-<section class={className}>
+<section id={id} tabindex="-1" class={className}>
   <SectionHeading eyebrow="Tool Belt" />
   <div class="grid gap-3 sm:grid-cols-2">
     {skills.map((skill) => (
